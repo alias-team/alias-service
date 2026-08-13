@@ -1,7 +1,5 @@
 # 100초 데모 시나리오 (최종)
 
-> 2026-08-13 확정. Challenge 3 기준. 오프라인 접점 요소는 스코프 아님(Challenge 02 관련 우려는 무관하여 폐기).
-
 ## 0. 목표 / 원칙
 
 **목표**: 고객의 새로운 Personal Signal을 시작으로 Vision을 통해 취향 Profile을 갱신하고, MCM의 Global Context와 연결해 후보를 선별한 뒤 Editorial Story를 축적하고 Monthly Magazine으로 발행하는 전체 핵심 플로우를 100초 안에 보여준다.
