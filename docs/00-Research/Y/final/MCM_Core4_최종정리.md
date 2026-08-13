@@ -47,7 +47,12 @@
 
 **판정 Rule**
 1. 공식 제품 설명에 형태 표현이 있으면 → 그 표현을 우선. 예: `slouched silhouette` → soft
-2. 형태 표현이 없으면 → 명확한 Category 매핑 사용. 예: Boston Bags → structured / Hobo → soft / Belt Bags → compact
+2. 형태 표현이 없으면 → 명확한 Category 매핑 사용. 현재 검증된 Category 매핑: Boston / Hobo / Belt Bag
+Crossbody는 일괄 매핑하지 않고, 개별 제품에 명시적 형태 근거가 있을 때만 판정
+Tote / Backpack / Weekender는 공식 근거 부족으로 보류
+
+즉 기존 Rule 자체를 새로 만드는 게 아니라 Category 매핑 목록만 업데이트.
+
 3. Category도 애매하고 형태 표현도 없으면 → 보류
 
 **충돌 처리**
