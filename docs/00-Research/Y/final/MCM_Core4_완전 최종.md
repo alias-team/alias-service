@@ -14,7 +14,7 @@ Core4는 단순 추천 필터가 아니라,
 고객이 선호한 제품과 신규 제품을 **동일한 기준으로 표현하기 위한 Common Representation**이다.
 
 사람이 축과 가능한 Value를 정의하고,
-AI는 제품 Evidence를 바탕으로 정해진 Value 중 하나를 선택한다.
+AI는 제품 Evidence를 바탕으로 정해진 Value 중 하나 이상을 선택한다. 기본적으로 단일 Value를 사용하며, 동일 축에서 복수 특성이 명확하게 공존하는 경우에만 복수 Value를 허용한다.
 
 판정 근거가 부족하면 억지로 분류하지 않고 `null` 처리한다.
 
@@ -43,7 +43,10 @@ Core4 Value는 다음 기준으로 검토했다.
 4. 고객의 반복적인 취향을 표현할 수 있는가
 5. Retrieval / Matching에 활용 가능한가
 6. Value가 과도하게 늘어나지 않는가
-7. 브랜드에 근거 없는 의미를 부여하지 않는가
+7. Core4 Attribute는 기본적으로 단일 Value를 사용하되,
+        동일 축에서 복수 특성이 명확하게 확인되는 경우 여러 Value를 허용하며 Array 형태로 저장한다.
+        단순한 판단의 애매함을 이유로 복수값을 부여하지 않는다.
+8. 브랜드에 근거 없는 의미를 부여하지 않는가
 
 제품의 세부 분위기나 추가적인 의미는 Core4가 아닌
 `Product Trait Discovery`에서 다룬다.
@@ -228,7 +231,19 @@ Product Name과 Product Description은 Runtime 분류 Evidence로 사용하지 �
 
 Trim, Pull tab처럼 부속 부분의 소재는 Core4 Material 판정에서 제외한다.
 
-두 Main Material 중 우선 소재를 결정할 근거가 없으면 `null`.
+### Multi-value 예외
+
+기본적으로 Main / Body 소재를 기준으로 단일 Value를 사용한다.
+
+다만 reversible, detachable equal parts, respectively 등
+서로 독립적이고 대등한 Main / Body 구조가 존재하고,
+각 구조의 Material Value가 실제로 다른 경우에는 복수 Value를 Array로 기록한다.
+
+Body / Trim 관계는 복수값 대상이 아니며 기존처럼 Body 소재만 판정한다.
+
+예:
+- MWHGATA014B001 → ["signature_monogram", "leather"]
+- MXBFSCJ04BK080 → ["leather", "signature_monogram"]
 
 ### 판정 우선순위
 
@@ -358,6 +373,22 @@ Product Name의 `Maxi`도 Evidence로 사용하지 않는다.
 
 > `none` = 확인했지만 없음  
 > `null` = 확인할 근거가 부족함
+
+### Multi-value 예외
+
+기본적으로 단일 Density Value를 사용한다.
+
+다만 reversible 또는 독립적인 대등 파트처럼
+서로 다른 면 / 파트가 동등하게 존재하고,
+각 면 / 파트의 Monogram Density가 실제로 다른 경우에는
+복수 Value를 Array로 기록한다.
+
+Trim / accent / handle / pocket 등 부수적 사용은 배열 대상이 아니며
+기존 low 규칙을 적용한다.
+
+예:
+- MWHGATA014B001 → ["high", "none"]
+- MXBFSCJ04BK080 → ["none", "medium"]
 
 ### Evidence Source
 
@@ -501,10 +532,20 @@ Color / Material / Monogram을 새로운 제품으로 검증.
 
 ```json
 {
-  "color_tone": "warm_neutral",
-  "silhouette_form": "structured",
-  "material": "signature_monogram",
-  "monogram_density": "medium"
+  "color_tone": ["warm_neutral"],
+  "silhouette_form": ["structured"],
+  "material": ["signature_monogram"],
+  "monogram_density": ["medium"]
+}
+```
+복수값 예시:
+
+```json
+{
+  "color_tone": ["mono"],
+  "silhouette_form": ["structured"],
+  "material": ["leather", "signature_monogram"],
+  "monogram_density": ["none", "medium"]
 }
 ```
 
@@ -512,10 +553,10 @@ Color / Material / Monogram을 새로운 제품으로 검증.
 
 ```json
 {
-  "color_tone": "mono",
+  "color_tone": ["mono"],
   "silhouette_form": null,
-  "material": "leather",
-  "monogram_density": "none"
+  "material": ["leather"],
+  "monogram_density": ["none"]
 }
 ```
 
