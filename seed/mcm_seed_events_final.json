@@ -1,0 +1,34 @@
+{
+  "events": [
+    {
+      "event_code": "EVT_HERITAGE_MOBILITY_2026",
+      "name": "MCM 50주년 — Mobility & Modern Nomad (Heritage Campaign)",
+      "event_type": "brand_event",
+      "campaign_overview": "MCM 창립 50주년(2026)을 기념하는 브랜드 헤리티지 캠페인. MCM 공식 헤리티지 페이지에 따르면 브랜드는 1976년 'Golden Age of Munich' 시기에 창립됐고, 창립자 Michael Cromer가 만든 최초의 여행용 제품(travel pieces)에서부터 'Mobility'가 브랜드의 핵심 철학으로 자리잡았다. 2026년은 이 정신을 재조명하는 'a year-long celebration of craft and heritage'로 기획되어 있으며, 뮌헨에서 마무리된다.",
+      "brand_message": "MCM 공식 문구 그대로: \"Mobility remains at the heart of the Haus. Since 1976, when Michael Cromer created the first travel pieces, it has shaped the MCM mindset — designing for modern nomads who see the world as home.\"",
+      "collection_concept": "Bauhaus의 'form follows function' 원칙을 제품에 적용해, \"practical, hands-free design made for modern movement\"을 지향한다고 명시돼 있음. 즉 이동 중에도 가볍고 실용적으로 쓸 수 있는 핸즈프리 구조·내구성 소재가 컬렉션 콘셉트의 핵심.",
+      "related_product_ids": [],
+      "source": "seed"
+    },
+    {
+      "event_code": "EVT_WETHEBEST_DJKHALED_2025",
+      "name": "MCM x DJ Khaled x We The Best",
+      "event_type": "campaign",
+      "campaign_overview": "MCM과 DJ Khaled의 We The Best 레이블이 협업한 캡슐 컬렉션. WWD/Complex/PAGE Magazine 등에 보도된 실제 캠페인으로, MCM 50주년을 기념하는 협업 중 하나. MCM은 이 협업을 \"a new collaboration that fuses music, culture, movement, and craftsmanship into a bold expression of travel and identity\"로 설명한다.",
+      "brand_message": "DJ Khaled 특유의 문구 \"As long as you show up and put in the work, you the best\"를 브랜드 메시지 축으로 삼고, 'We The Best'/'Another One' 카피가 RTW 제품에 실제로 프린트됨. 라이프스타일 태도와 헌신을 강조.",
+      "collection_concept": "Stark Backpack·Ottomar Weekender 등 MCM 시그니처 아이템을 cognac Visetos에 ultrasuede·밝은 블루 가죽 악센트로 재해석. \"Miami energy\"와 \"Miami Art Deco flair\"를 결합해 여행과 개인 스타일을 정체성의 중심 표현으로 위치시킴.",
+      "related_product_ids": [],
+      "source": "seed"
+    },
+    {
+      "event_code": "EVT_YEAROFTHESNAKE_2025",
+      "name": "MCM Year of the Snake — Lunar New Year 2025 Capsule",
+      "event_type": "collection",
+      "campaign_overview": "2025년 음력 설(Lunar New Year)을 기념하는 10피스 한정 캡슐 컬렉션. MCM은 뱀띠 해의 특징을 \"intuition, resourcefulness, and adaptability\"로 규정하고, 이를 \"embracing new challenges\"로 연결해 컬렉션 콘셉트를 세웠다. 비주얼 캠페인은 \"the interplay of water reflections and wave-like motions\"를 강조하는 언더씨(undersea) 미학을 사용.",
+      "brand_message": "\"wisdom, mystery, and introspection\"의 축제로 컬렉션을 포지셔닝하며, 시즌에 얽매이지 않는 디자인 철학을 통해 \"enigma, vibrancy, freedom, and joy\"를 담아낸다고 설명.",
+      "collection_concept": "골드·블러시 핑크 톤의 스네이크스킨 패턴과 뱀의 움직임을 형상화한 굴곡진 패턴이 전반에 적용됨. 크리스탈 디테일이 들어간 Nappa 가죽 악센트, Stark Backpack의 파이톤 컬러웨이 리디자인, Toni·X-Mini 쇼퍼백 재해석, 비스포크 스네이크 패턴이 들어간 Diamond 크로스바디가 핵심 아이템.",
+      "related_product_ids": [],
+      "source": "seed"
+    }
+  ]
+}

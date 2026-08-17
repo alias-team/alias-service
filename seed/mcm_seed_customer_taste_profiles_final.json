@@ -1,0 +1,37 @@
+{
+  "customer_taste_profiles": [
+    {
+      "customer_code": "DEMO-CUSTOMER-A",
+      "taste_summary": "고객 A가 선택한 제품 5건 중 Core4 데이터가 확인된 3건(MEZDSMM14CO001, MMRFSTA06BK001, MMKEATA02CO001) 중 Monogram Density가 확인된 3건 모두를 보면 medium이 2건(MEZDSMM14CO001-구매, MMKEATA02CO001-위시리스트), low가 1건(MMRFSTA06BK001-구매)으로 medium이 반복된다. Color/Tone(mono 1건, warm_neutral 1건), Silhouette/Form(soft 1건), Material(nylon 1건, signature_monogram 1건)은 축마다 확인된 근거가 1건씩뿐이라 반복 패턴으로 보기 어렵다. 나머지 2건(MESCSMM01BK035, MXZGSTT08CO001)은 Core4 데이터 자체가 없다.",
+      "core_preference": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": [
+          "medium"
+        ]
+      },
+      "ai_traits": [],
+      "evidence_product_ids": [
+        "MEZDSMM14CO001",
+        "MMKEATA02CO001"
+      ],
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "customer_code": "DEMO-CUSTOMER-B",
+      "taste_summary": "고객 B가 선택한 제품 5건 중 Core4 데이터가 확인된 4건(MMBFSTA01VC001, MHJGSMM01BK046, MWCGAAK01CO001, MWHGSTA03BK001)에서는 Color/Tone(saturated/warm_neutral/mono), Silhouette/Form(envelope/soft), Material(signature_monogram/leather), Monogram Density(low/medium/high) 모두 축마다 서로 다른 값이 1건씩만 나타나 동일 값이 2회 이상 반복되는 축이 없다. 위시리스트 1건(MXS8ALL42BK001)은 Core4 데이터가 없다. 현재 확보된 근거로는 반복되는 Core4 Preference를 확정할 수 없다.",
+      "core_preference": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_traits": [],
+      "evidence_product_ids": [],
+      "source": "seed",
+      "is_current": true
+    }
+  ]
+}

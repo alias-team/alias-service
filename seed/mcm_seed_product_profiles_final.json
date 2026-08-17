@@ -1,0 +1,743 @@
+{
+  "product_profiles": [
+    {
+      "product_code": "MWTGABO01MT001",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": "structured",
+        "material": "signature_monogram",
+        "monogramDensity": "medium"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "silhouetteForm",
+          "value": "structured",
+          "text": "Silhouette LOCK v4 경계조건표 structured 대표 사례로 명시",
+          "sourceDoc": "silhouette_최종LOCK.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": "medium",
+          "text": "meta description·Body 필드 모두 \"Diamond monogram jacquard\" 명시",
+          "sourceDoc": "monogram_density_최종확정.md"
+        },
+        {
+          "axis": "material",
+          "value": "signature_monogram",
+          "text": "material=\"Diamond monogram jacquard\" — AI_CORE4_SCHEMA signature_monogram 조건 \"monogram + jacquard\" 리터럴 일치",
+          "sourceDoc": "AI_CORE4_SCHEMA.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MMPGSDC02BK001",
+      "core4": {
+        "colorTone": "mono",
+        "silhouetteForm": null,
+        "material": "leather",
+        "monogramDensity": "none"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "colorTone",
+          "value": "mono",
+          "text": "color_name=Black",
+          "sourceDoc": "core4_batch1_result.md"
+        },
+        {
+          "axis": "material",
+          "value": "leather",
+          "text": "material=\"Calfskin leather\"",
+          "sourceDoc": "core4_batch1_result.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": "none",
+          "text": "모노그램 언급 없음",
+          "sourceDoc": "core4_batch1_result.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MYZEAAK01BK001",
+      "core4": {
+        "colorTone": "mono",
+        "silhouetteForm": "envelope",
+        "material": "signature_monogram",
+        "monogramDensity": "high"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "colorTone",
+          "value": "mono",
+          "text": "color_name=Black",
+          "sourceDoc": "core4_batch2_result.md"
+        },
+        {
+          "axis": "silhouetteForm",
+          "value": "envelope",
+          "text": "Silhouette LOCK v4 경계조건표 envelope 대표 사례로 명시",
+          "sourceDoc": "silhouette_최종LOCK.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": "high",
+          "text": "material 필드에 \"Maxi Visetos\" 리터럴 명시",
+          "sourceDoc": "monogram_density_최종확정.md"
+        },
+        {
+          "axis": "material",
+          "value": "signature_monogram",
+          "text": "material=\"Maxi Visetos and Lauretos monogram canvas\" — AI_CORE4_SCHEMA signature_monogram 조건 \"monogram + canvas\" 리터럴 일치(Visetos/Lauretos는 패턴명일 뿐 Material Value 구분과 무관)",
+          "sourceDoc": "AI_CORE4_SCHEMA.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MMZGSFI01BK001",
+      "core4": {
+        "colorTone": "mono",
+        "silhouetteForm": "compact",
+        "material": "nylon",
+        "monogramDensity": "medium"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "colorTone",
+          "value": "mono",
+          "text": "color_name=Black",
+          "sourceDoc": "core4_batch3_result.md"
+        },
+        {
+          "axis": "silhouetteForm",
+          "value": "compact",
+          "text": "Silhouette LOCK v4 경계조건표 compact(벨트백) 대표 사례로 명시",
+          "sourceDoc": "silhouette_최종LOCK.md"
+        },
+        {
+          "axis": "material",
+          "value": "nylon",
+          "text": "material=\"Italian nylon\"",
+          "sourceDoc": "core4_batch3_result.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": "medium",
+          "text": "일반 Visetos monogram",
+          "sourceDoc": "core4_batch3_result.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MWHGSTA03BK001",
+      "core4": {
+        "colorTone": "mono",
+        "silhouetteForm": "soft",
+        "material": "leather",
+        "monogramDensity": "high"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "colorTone",
+          "value": "mono",
+          "text": "color_name=Black",
+          "sourceDoc": "core4_batch3_result.md"
+        },
+        {
+          "axis": "silhouetteForm",
+          "value": "soft",
+          "text": "Silhouette LOCK v4 경계조건표 soft 대표 사례로 명시",
+          "sourceDoc": "silhouette_최종LOCK.md"
+        },
+        {
+          "axis": "material",
+          "value": "leather",
+          "text": "material=\"Natural full-grain leather\"",
+          "sourceDoc": "core4_batch3_result.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": "high",
+          "text": "\"maximalist interpretation\" · Maxi 명시",
+          "sourceDoc": "core4_batch3_result.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MWSESAC05DG001",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_product_traits": [],
+      "evidence": [],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MMTFSTA021B001",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_product_traits": [],
+      "evidence": [],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MMKEATA02CO001",
+      "core4": {
+        "colorTone": "warm_neutral",
+        "silhouetteForm": null,
+        "material": "signature_monogram",
+        "monogramDensity": "medium"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "colorTone",
+          "value": "warm_neutral",
+          "text": "color_name=Cognac",
+          "sourceDoc": "core4_batch1_result.md"
+        },
+        {
+          "axis": "material",
+          "value": "signature_monogram",
+          "text": "일반 Visetos monogram canvas",
+          "sourceDoc": "core4_batch1_result.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": "medium",
+          "text": "일반 Visetos monogram",
+          "sourceDoc": "core4_batch1_result.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MWREAAK04SV001",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_product_traits": [],
+      "evidence": [],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MWHGATA014B001",
+      "core4": {
+        "colorTone": "warm_neutral",
+        "silhouetteForm": "soft",
+        "material": [
+          "signature_monogram",
+          "leather"
+        ],
+        "monogramDensity": [
+          "high",
+          "none"
+        ]
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "colorTone",
+          "value": "warm_neutral",
+          "text": "color_name=Brown",
+          "sourceDoc": "core4_batch3_result.md"
+        },
+        {
+          "axis": "silhouetteForm",
+          "value": "soft",
+          "text": "Silhouette LOCK v4 경계조건표 soft 대표 사례로 명시",
+          "sourceDoc": "silhouette_최종LOCK.md"
+        },
+        {
+          "axis": "material",
+          "value": [
+            "signature_monogram",
+            "leather"
+          ],
+          "text": "\"Sculpted from Maxi Visetos canvas and calfskin respectively, this detachable duet of hobo bags\" — 분리형 2파츠 대등 구조, Material LOCK v4 배열 예외 적용",
+          "sourceDoc": "material_최종LOCK.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": [
+            "high",
+            "none"
+          ],
+          "text": "Visetos 파츠=material 필드 \"Maxi\" 리터럴→high / calfskin 파츠=모노그램 언급 없음→none, Monogram Density LOCK v4 배열 예외 적용",
+          "sourceDoc": "monogram_density_최종확정.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MMRFSTA06BK001",
+      "core4": {
+        "colorTone": "mono",
+        "silhouetteForm": "soft",
+        "material": "nylon",
+        "monogramDensity": "low"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "colorTone",
+          "value": "mono",
+          "text": "color_name=Black",
+          "sourceDoc": "core4_batch3_result.md"
+        },
+        {
+          "axis": "silhouetteForm",
+          "value": "soft",
+          "text": "Silhouette LOCK v4 경계조건표 soft 대표 사례로 명시",
+          "sourceDoc": "silhouette_최종LOCK.md"
+        },
+        {
+          "axis": "material",
+          "value": "nylon",
+          "text": "material=\"Italian recycled nylon\"",
+          "sourceDoc": "core4_batch3_result.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": "low",
+          "text": "\"Visetos monogram printed mesh pocket\" — 부분 부위(포켓)에만 사용, low 정의 부합",
+          "sourceDoc": "core4_batch3_result.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MMBFSTA01VC001",
+      "core4": {
+        "colorTone": "saturated",
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "colorTone",
+          "value": "saturated",
+          "text": "json-ld color_name=Blue (재조사로 확인 — \"Navy Blazer\" 표현은 raw 크롤링 데이터에 없음). Blue는 muted 신호단어 없어 saturated",
+          "sourceDoc": "색상필드_재조사_결과.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MWTGSTA04BK001",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_product_traits": [],
+      "evidence": [],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MMZFSFI021B001",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_product_traits": [],
+      "evidence": [],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MWCGAAK01CO001",
+      "core4": {
+        "colorTone": "warm_neutral",
+        "silhouetteForm": "envelope",
+        "material": "signature_monogram",
+        "monogramDensity": "medium"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "colorTone",
+          "value": "warm_neutral",
+          "text": "color_name=Cognac",
+          "sourceDoc": "core4_batch3_result.md"
+        },
+        {
+          "axis": "silhouetteForm",
+          "value": "envelope",
+          "text": "Silhouette LOCK v4 경계조건표 envelope 대표 사례로 명시",
+          "sourceDoc": "silhouette_최종LOCK.md"
+        },
+        {
+          "axis": "material",
+          "value": "signature_monogram",
+          "text": "일반 Visetos monogram",
+          "sourceDoc": "core4_batch3_result.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": "medium",
+          "text": "일반 Visetos monogram",
+          "sourceDoc": "core4_batch3_result.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MESCSMM01BK035",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_product_traits": [],
+      "evidence": [],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MESESMM01OQ035",
+      "core4": {
+        "colorTone": "saturated",
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": "none"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "colorTone",
+          "value": "saturated",
+          "text": "base_color=Orange — 별도 예외 없이 기존 Rule로 saturated 확정",
+          "sourceDoc": "color_tone_최종LOCK.md"
+        },
+        {
+          "axis": "silhouetteForm",
+          "value": null,
+          "text": "품절 상품 이미지 lazy-load 실패로 Vision 판정 근거 자체가 없음 — 명시적으로 null 처리된 케이스(데이터 없음이 아니라 '확인 불가'로 확정)",
+          "sourceDoc": "silhouette_최종LOCK.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": "none",
+          "text": "raw HTML bullet까지 확인, 모노그램 리터럴 전혀 없음",
+          "sourceDoc": "monogram_density_최종확정.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MESCSMM01BK036",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": "medium"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "monogramDensity",
+          "value": "medium",
+          "text": "material=\"Visetos monogram coated canvas\"",
+          "sourceDoc": "monogram_density_최종확정.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MESDSLD01BK035",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": "none"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "silhouetteForm",
+          "value": null,
+          "text": "품절 상품 이미지 lazy-load 실패로 Vision 판정 근거 자체가 없음 — 명시적으로 null 처리된 케이스(데이터 없음이 아니라 '확인 불가'로 확정)",
+          "sourceDoc": "silhouette_최종LOCK.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": "none",
+          "text": "raw HTML bullet까지 확인, 모노그램 리터럴 전혀 없음",
+          "sourceDoc": "monogram_density_최종확정.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MHJFAMM01VC00L",
+      "core4": {
+        "colorTone": "saturated",
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": "low"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "colorTone",
+          "value": "saturated",
+          "text": "color_name=Navy Blazer (Navy는 신호단어 아님 → 기본 saturated)",
+          "sourceDoc": "color_tone_최종LOCK.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": "low",
+          "text": "desc: \"monogram...jacquard motif flows along the shoulders and sleeves\"",
+          "sourceDoc": "monogram_density_최종확정.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MHJGSMM01BK046",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": "low"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "monogramDensity",
+          "value": "low",
+          "text": "desc: \"Embossed renditions of the...Visetos monogram\"",
+          "sourceDoc": "monogram_density_최종확정.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MHJGSMM02GK046",
+      "core4": {
+        "colorTone": "muted",
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": "low"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "colorTone",
+          "value": "muted",
+          "text": "color_name=Khaki",
+          "sourceDoc": "color_tone_최종LOCK.md"
+        },
+        {
+          "axis": "monogramDensity",
+          "value": "low",
+          "text": "desc: \"Visetos monogram printed leather details\"",
+          "sourceDoc": "monogram_density_최종확정.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MHCGSMM02CO00L",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": "medium"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "monogramDensity",
+          "value": "medium",
+          "text": "desc: \"enveloped in...the Visetos monogram\"",
+          "sourceDoc": "monogram_density_최종확정.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MXS8ALL42BK001",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_product_traits": [],
+      "evidence": [],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MXEBAVI03CO001",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_product_traits": [],
+      "evidence": [],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MXZGSTT03BK001",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_product_traits": [],
+      "evidence": [],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MXZGSTT08CO001",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_product_traits": [],
+      "evidence": [],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MXBESAK02BK001",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": "medium"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "monogramDensity",
+          "value": "medium",
+          "text": "리버서블 벨트: front=Visetos canvas, alternate=Lauretos canvas — 양쪽 다 medium 리터럴이라 단일 medium",
+          "sourceDoc": "monogram_density_최종확정.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MEZDSMM14CO001",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": "medium"
+      },
+      "ai_product_traits": [],
+      "evidence": [
+        {
+          "axis": "monogramDensity",
+          "value": "medium",
+          "text": "material=\"Visetos monogram canvas\"",
+          "sourceDoc": "monogram_density_최종확정.md"
+        }
+      ],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    },
+    {
+      "product_code": "MFWFSMM01CO0XL",
+      "core4": {
+        "colorTone": null,
+        "silhouetteForm": null,
+        "material": null,
+        "monogramDensity": null
+      },
+      "ai_product_traits": [],
+      "evidence": [],
+      "analysis_model": null,
+      "source": "seed",
+      "is_current": true
+    }
+  ]
+}
