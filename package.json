@@ -9,7 +9,8 @@
     "lint": "eslint",
     "test": "vitest run",
     "db:seed": "node scripts/seed.mjs",
-    "db:seed:apply": "node scripts/seed.mjs --apply"
+    "db:seed:apply": "node scripts/seed.mjs --apply",
+    "ai:test-product": "node scripts/test-product-understanding.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
