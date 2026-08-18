@@ -40,7 +40,8 @@ TASK-207 책임:
 
 - Issue 구조를 실제 Editorial Content로 변환
 - Magazine 형태 JSON 생성
-- DB `personal_editorials.editorial_content` 저장용 데이터 생성
+- TASK-301이 `personal_editorials.editorial_content`에 저장할 수 있는 JSON 생성
+- DB 저장, Repository, Service, API는 담당하지 않음
 
 ---
 
@@ -58,11 +59,21 @@ TASK-207은 아래 Input을 전달받는다.
 
   "customer_taste_profile": {},
 
-  "products": [],
+  "event": {
+    "event_id": "",
+    "event_type": "collection | campaign | brand_event"
+  },
 
-  "gatekeeper_results": []
+  "brand_asset": {
+    "image_url": ""
+  },
+
+  "products": []
 }
 ```
+
+`gatekeeper_results`는 직접 입력으로 받지 않는다. Product 선택과 Editorial 방향은
+TASK-206의 검증된 `IssueComposition`만 사용한다.
 
 ---
 
@@ -205,6 +216,8 @@ Example:
 }
 ```
 
+각 Product Data는 같은 `product_id`의 Product Profile과 함께 하나의 Product Context로 전달한다.
+
 ---
 
 # 3.5 Product Profile
@@ -233,29 +246,31 @@ Product 의미 생성 근거
 
 ---
 
-# 3.6 Gatekeeper Result
+# 3.6 Event / Brand Asset
 
 Source:
 
-TASK-205
+`events.event_type` 및 호출 계층이 제공하는 공식 Brand Asset
 
 
 Fields:
 
 ```json
 {
- "product_id":"",
- "reason":"",
- "editorial_angle":"",
- "meaning_bridge":"",
- "extension":"",
- "evidence":[]
+ "event": {
+   "event_id":"",
+   "event_type":"collection | campaign | brand_event"
+ },
+ "brand_asset": {
+   "image_url":""
+ }
 }
 ```
 
 Purpose:
 
-Product와 Customer 연결 이유 생성
+- `events.event_type`을 `brand_story.story_type`에 변환 없이 직접 매핑
+- `brand_asset.image_url`을 `brand_story.image_url`에 직접 매핑
 
 ---
 
@@ -290,7 +305,7 @@ Personal Editorial JSON
 
 
     "brand_story": {
-      "story_type": "campaign | collection | heritage",
+      "story_type": "collection | campaign | brand_event",
       "image_url": "",
       "title": "",
       "content": ""
@@ -339,6 +354,8 @@ product_id
 product_name
 image_url
 brand_story.image_url
+brand_story.story_type
+email_header.sender
 ```
 
 이유:
@@ -494,7 +511,10 @@ Table:
 
 `personal_editorials`
 
-저장:
+TASK-207 반환값은 TASK-301이 저장할 수 있는 `editorial_content` 원본이다.
+TASK-207은 DB에 직접 저장하지 않는다.
+
+저장 대상:
 
 ```json
 editorial_content
@@ -526,7 +546,6 @@ editorial_content
 - OpenAI Structured Output 호출
 - JSON Schema Validation
 - Editorial JSON 생성
-- personal_editorials 저장
 
 제외:
 
@@ -535,6 +554,7 @@ editorial_content
 - 다국어 번역
 - 자동 이미지 수집
 - 구매 CTA 최적화
+- DB 저장
+- Repository / Service / API
 
 ---
-
