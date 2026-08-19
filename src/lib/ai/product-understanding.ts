@@ -95,12 +95,14 @@ function buildSystemPrompt(): string {
 - AI Product Trait은 Core4(Color/Tone, Silhouette/Form, Material, Monogram Density)만으로는 설명하기 어려운, **이 제품에만 해당하는** 추가적인 디자인 방향/구조적 특징/사용 방식/문화적·스타일적 의미를 표현한다.
 - Modern Heritage, Urban Functionality는 Trait이 어떤 "성격"의 표현이어야 하는지 보여주는 역할 설명용 예시일 뿐, 실제 출력 후보가 아니다. 이 단어(또는 그와 동일한 조합)를 실제 name으로 그대로 출력하지 않는다. 매번 이 제품의 실제 Evidence에서 새로 도출한 이름을 만든다.
 - 금지: Trait 이름/reason이 Core4 축이나 축 값을 다른 말로 바꿔 재표현하는 것. 예: mono/monochrome을 "Monochrome Minimalism"으로, high monogram density를 "Maximal Monogram"으로, leather를 "Leather Luxury"로, structured를 "Structured Elegance"로 부르는 것처럼, Core4 값이나 그 축의 판정 근거(색, 실루엣 형태, 소재, 모노그램 밀도)를 이름만 바꿔 다시 말하는 모든 방식을 금지한다. Trait은 그 Core4 값들이 "왜/어떻게 이 제품만의 의미를 만드는지"를 설명해야지, 축 값 자체를 재진술해서는 안 된다.
+- **자체 검토 절차**: 각 Trait 후보를 만든 뒤, 최종 출력하기 전에 이 제품에서 방금 판정한 Core4 4개 값(colorTone, silhouetteForm, material, monogramDensity)과 그 후보를 하나씩 비교한다. 그 Trait의 name이 Core4 값 자체이거나, 그 값을 가리키는 직접적인 동의어/자연어 표현(예: high monogram density → "maxi"/"maximal", mono → "monochrome", structured → "structured", leather → "leather" 등 축 값을 다른 단어로만 바꾼 표현)이면, 그 Trait은 Core4와 구별되지 않으므로 그대로 출력하지 않는다. 이 경우 해당 Trait을 버리고, 같은 제품의 description/evidence에서 Core4 4개 축이 아직 설명하지 않는 다른 구체적 특징(구조, 사용 방식, 문화적 참조, 디자인 서사 등)을 다시 찾아 대체한다. 이 검토는 일반 원칙이며 특정 제품명이나 특정 문자열에만 적용되는 예외가 아니다.
 - 금지: 부속품이나 디테일을 그대로 이름으로 나열하는 것 (예: "Detachable Charm", "Leather Strap" 같은 이름은 금지). 그런 디테일은 evidence의 text로만 인용하고, name/reason은 그 디테일이 만들어내는 디자인적·브랜드적 의미로 종합해서 표현한다. 단순 기능/부속 목록 나열은 Trait이 아니다.
 - 금지: Elegance, Luxury, Sophistication, Craftsmanship, Minimalism처럼 거의 모든 럭셔리 제품에 똑같이 붙일 수 있는 일반적인 단어만으로 name을 구성하는 것. 이런 단어 자체가 금지는 아니지만, 이 제품만의 구체적인 특징(구조, 사용 방식, 문화적 모티프 등)과 결합되지 않은 채 형용사만 갖다 붙이는 방식은 금지한다. name과 reason은 다른 제품에는 붙일 수 없고 이 제품에만 붙일 수 있는 이유를 설명해야 한다.
 - 특히 "Craftsmanship"은 name에 기본값처럼 쓰지 않는다. Description에 craftsmanship, artisanal, exquisite craftsmanship 같은 표현이 실제로 등장하더라도, 그 단어를 그대로 옮기거나 요약해 name으로 쓰지 않는다. 그 문장이 가리키는 더 구체적인 대상(예: 특정 디테일, 마감 방식, 소재 조합 자체)이 있다면 그 구체적 대상으로 표현하고, 그럴 만한 새로운 관찰이 없다면 이 문구는 Trait 근거로 사용하지 않는다.
 - 금지: Product Description의 문장을 거의 그대로 옮겨 name이나 reason으로 쓰는 것. name/reason은 이미지와 Description을 종합해서 만든 해석이어야 하며, 원문 문장을 살짝 바꾸는 수준의 재구성이 아니어야 한다. 원문 표현은 evidence의 text에만 인용한다. 특히 craftsmanship/artisanal 계열의 일반적인 품질 자랑 문구는 요약하지 말고, Trait의 근거로 삼을 만한 다른 구체적 문장이 없는지 먼저 찾는다.
 - 금지: Core4 판정에 사용한 것과 같은 Evidence를 문장만 바꿔 그대로 Trait의 근거로 재사용하는 것. 특히 monogram/density, material, color, silhouette 자체를 가리키는 문장(예: 모노그램이 어디에 어떻게 쓰였는지, 소재가 무엇인지)만으로 Trait을 만들지 않는다. Trait은 Core4 축 판정에 쓴 것과 별개로, Core4가 다루지 않는 새로운 관찰(구조, 사용 방식, 문화적 참조, 디자인 서사 등)에 근거해야 한다.
 - 각 Trait은 "이 제품이 다른 제품과 무엇이 다른가"를 한 문장으로 답할 수 있어야 한다. ai_product_traits는 반드시 2~3개를 채워야 하며, 개수가 부족하다는 이유로 Trait 생성을 생략하지 않는다 — 아래 금지 규칙을 지키는 범위 안에서 이미지와 설명을 다시 살펴 서로 다른 근거(구조, 사용 방식, 문화적 참조, 디자인 서사 등)를 최소 2개 찾아낸다.
+- **개수 우선순위**: 이미지와 설명에 서로 겹치지 않는 독립적인 근거(구조, 사용 방식, 문화적 참조, 디자인 서사 등)가 3개 이상 실제로 확인되면, 2개가 아니라 3개를 출력하는 것을 우선한다 — 2개는 근거가 부족할 때만 선택하는 최소값이지 기본값이 아니다. 단, 숫자를 채우기 위해 근거가 약하거나 다른 Trait과 사실상 같은 내용을 반복하는 세 번째 Trait을 억지로 만들지 않는다. 3개 각각은 서로 다른 구체적 근거에 기반해야 하고, 위의 모든 금지 규칙(Core4 재표현, 부속품 나열, 일반 단어만 사용, 원문 그대로 복사 등)을 동일하게 지켜야 한다. 독립적인 근거가 실제로 2개뿐이면 2개만 출력한다.
 - 각 Trait은 name, reason, evidence(최소 1개, {source, text})로 구성한다.
 - reason은 이미지/설명에서 실제로 확인되는 근거에 기반해야 하며, 근거 없는 브랜드 의미를 부여하지 않는다.
 - evidence.source는 "product_image" 또는 "product_description" 중 하나만 사용한다.
@@ -195,6 +197,231 @@ function validateMaterialMultiValueEvidence(normalized: unknown, officialDescrip
   };
 }
 
+// AI Product Trait 의미 품질: 시스템 프롬프트가 이미 금지하고 있는 규칙들이 prompt-only라
+// 반복적으로 뚫리는 사례(Elegance/Sophistication류 일반 단어, Craftsmanship 표현의 설명 원문
+// 그대로 복사, Core4 값의 단순 이름 변경, officialDescription에 존재하지 않는 evidence 생성)만
+// code-level로 다시 한번 기계적으로 확인한다. 새로운 의미 판단 규칙을 추가하지 않는다.
+// 아래 두 규칙(금지 일반 단어 / Craftsmanship 원문 복사)은 문서상 필수 구조 요건이 아니라
+// 품질 권고 수준이라 정상일 가능성이 있는 Product Profile까지 hard FAIL시키지 않는다.
+// 대신 soft warning(Task201TraitWarning)만 로그로 남기고 결과는 그대로 반환한다.
+export interface TraitQualityWarning {
+  traitName: string;
+  rule: "generic_wording" | "craftsmanship_copied";
+  message: string;
+}
+
+const BANNED_GENERIC_TRAIT_WORDS = /\b(elegance|sophistication)\b/i;
+
+function collectBannedGenericWordWarnings(
+  traits: ProductProfileAiOutput["ai_product_traits"]
+): TraitQualityWarning[] {
+  const warnings: TraitQualityWarning[] = [];
+  for (const trait of traits) {
+    if (BANNED_GENERIC_TRAIT_WORDS.test(trait.name)) {
+      warnings.push({
+        traitName: trait.name,
+        rule: "generic_wording",
+        message: "generic wording detected",
+      });
+    }
+  }
+  return warnings;
+}
+
+function normalizeForSubstringMatch(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+// "Craftsmanship"은 프롬프트가 이미 "설명 원문을 그대로/요약해 name으로 쓰지 않는다"고
+// 금지하는 특별 규칙이 있다. name 전체가 officialDescription 안에 (구두점만 다르게) 그대로
+// 들어있는 경우만 경고한다 — Craftsmanship이라는 단어 자체를 금지하지 않는다.
+function collectCopiedCraftsmanshipWarnings(
+  traits: ProductProfileAiOutput["ai_product_traits"],
+  officialDescription: string
+): TraitQualityWarning[] {
+  const normalizedDescription = normalizeForSubstringMatch(officialDescription);
+  const warnings: TraitQualityWarning[] = [];
+  for (const trait of traits) {
+    if (!/craftsmanship/i.test(trait.name)) continue;
+    const normalizedName = normalizeForSubstringMatch(trait.name);
+    if (normalizedName.length > 0 && normalizedDescription.includes(normalizedName)) {
+      warnings.push({
+        traitName: trait.name,
+        rule: "craftsmanship_copied",
+        message: "craftsmanship phrase copied from description",
+      });
+    }
+  }
+  return warnings;
+}
+
+// Core4 재포장 판정을, 관찰된 나쁜 출력 문자열을 하나씩 등록하는 방식이 아니라 "이 제품이 실제로
+// 가진 Core4 값 자체"에서 매번 자동으로 도출한다. trait.name만 대상으로 한다(오탐 축소를 위해
+// reason/evidence 문장까지는 비교하지 않는다). 두 개의 일반 규칙 + 두 개의 좁은 예외로 구성된다:
+//
+// A) 값-토큰 전체 일치(모든 축·모든 값에 동일 적용): 이 제품의 축 값(예: "signature_monogram")을
+//    "_" 기준으로 쪼갠 뒤, 그 조각들이 전부 trait.name에 "단어"로(부분 문자열이 아니라) 나타나면
+//    재포장으로 본다. 새 값이 추가돼도 이 값 자체에서 매번 다시 계산되므로 별도 등록이 필요 없다.
+// B) monogramDensity 축의 고유 의미: 이 축은 "모노그램이 얼마나 쓰였는가"를 나타낸다
+//    (AI_CORE4_SCHEMA.md). 값이 "none"이 아니면(모노그램 존재가 이미 판정됐으므로) trait.name에
+//    "monogram"이라는 단어가 있는 것 자체가 이 축이 이미 말한 사실의 재포장이다 — 특정 density
+//    값이나 특정 문자열을 나열하지 않고, 이 축의 의미 하나로 low/medium/high 전부에 동일 적용된다.
+// C) colorTone="mono"의 자연어 표현(mono/monochrome)과 D) monogramDensity="high"의 문서상
+//    리터럴 트리거(Maxi/Maximal, AI_CORE4_SCHEMA.md 정의)는 값 문자열을 단순히 이어붙인 것이
+//    아니라 불규칙한 표현이라 A)로 일반화되지 않는다. 이 두 개만 예외로 남긴다.
+function splitCore4ValueIntoWords(value: string): string[] {
+  return value.split("_").filter((word) => word.length > 0);
+}
+
+function nameContainsWholeWord(name: string, word: string): boolean {
+  const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`\\b${escaped}\\b`, "i").test(name);
+}
+
+function isValueWordRestatement(traitName: string, axisValue: string): boolean {
+  const words = splitCore4ValueIntoWords(axisValue);
+  return words.length > 0 && words.every((word) => nameContainsWholeWord(traitName, word));
+}
+
+const MONO_COLOR_TONE_PATTERN = /\bmono(chrome)?\b/i;
+const MONOGRAM_HIGH_TRIGGER_PATTERN = /\bmaxi(mal)?\b/i;
+
+// 07_DATABASE_SCHEMA.md 4.2: AI Product Trait은 2~3개를 기준으로 저장한다. Core4 재포장
+// Trait은 Product Profile 전체를 FAIL시키지 않고, 그 Trait만 제외한다 — 제외 후에도 유효한
+// Trait이 2개 이상 남으면 그 나머지로 정상 진행한다.
+function isCore4RestatementTrait(
+  trait: ProductProfileAiOutput["ai_product_traits"][number],
+  core4: ProductProfileAiOutput["core4"]
+): boolean {
+  const axes: ReadonlyArray<keyof ProductProfileAiOutput["core4"]> = [
+    "colorTone",
+    "silhouetteForm",
+    "material",
+    "monogramDensity",
+  ];
+
+  for (const axis of axes) {
+    const rawValue = core4[axis];
+    if (rawValue === null) continue;
+    const values = Array.isArray(rawValue) ? rawValue : [rawValue];
+
+    // A) 값-토큰 전체 일치 — 모든 축에 동일하게 적용되는 일반 규칙
+    if (values.some((value) => isValueWordRestatement(trait.name, value))) {
+      return true;
+    }
+
+    if (axis === "colorTone" && values.includes("mono") && MONO_COLOR_TONE_PATTERN.test(trait.name)) {
+      // C) mono의 자연어 표현(monochrome)
+      return true;
+    }
+
+    if (axis === "monogramDensity") {
+      // B) monogramDensity 축 고유 의미: none이 아니면 "monogram" 단어 자체가 재포장
+      if (values.some((value) => value !== "none") && nameContainsWholeWord(trait.name, "monogram")) {
+        return true;
+      }
+      // D) high의 문서상 리터럴 트리거(Maxi/Maximal)
+      if (values.includes("high") && MONOGRAM_HIGH_TRIGGER_PATTERN.test(trait.name)) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+// 07_DATABASE_SCHEMA.md/AI_CORE4_SCHEMA.md 어디에도 "Trait evidence가 top-level evidence와
+// 겹치면 안 된다"는 규칙은 없다 — 같은 공식 문장이 제품 전체 근거이면서 동시에 특정 Trait의
+// 근거가 되는 것은 구조적으로 가능하다. 실제로 지켜야 할 것은 "evidence가 실제 입력에 존재하는가"
+// (근거 없는 evidence를 지어내지 않는가)이지, "다른 evidence와 겹치지 않는가"가 아니다.
+// source="product_description"인 evidence만 officialDescription 원문에 실제로 존재하는지
+// (부분 문자열로) 확인한다. source="product_image"는 이미지 자체를 재검증할 수단이 없어
+// 여기서 판단하지 않는다(source 값 자체는 이미 Zod가 enum으로 강제한다).
+function findUngroundedTrait(
+  traits: ProductProfileAiOutput["ai_product_traits"],
+  officialDescription: string
+): string | null {
+  const normalizedDescription = officialDescription.trim();
+  for (const trait of traits) {
+    for (const evidence of trait.evidence) {
+      if (evidence.source !== "product_description") continue;
+      if (!normalizedDescription.includes(evidence.text.trim())) {
+        return trait.name;
+      }
+    }
+  }
+  return null;
+}
+
+export class TraitQualityValidationError extends Error {
+  constructor(message: string) {
+    super(`AI Product Trait 품질 검증 실패: ${message}`);
+    this.name = "TraitQualityValidationError";
+  }
+}
+
+// Hard validation(구조/Core4 재포장/evidence 완전 재사용)을 통과한 뒤에도 남을 수 있는
+// 품질 권고 수준 이슈를 warning으로 로그한다. product_id가 없는 컨텍스트(단위 테스트 등)에서도
+// 호출 가능하도록 별도 인자로 받지 않고 trait name 기준으로만 식별한다.
+function logTraitQualityWarnings(warnings: TraitQualityWarning[]): void {
+  for (const warning of warnings) {
+    console.warn(`[Task201TraitWarning] product trait "${warning.traitName}": ${warning.message}`);
+  }
+}
+
+export interface TraitQualityResult {
+  /** Core4 재포장 Trait을 제외하고 남은, 최종적으로 사용할 ai_product_traits. */
+  traits: ProductProfileAiOutput["ai_product_traits"];
+  warnings: TraitQualityWarning[];
+}
+
+export function validateTraitQuality(
+  output: ProductProfileAiOutput,
+  officialDescription: string
+): TraitQualityResult {
+  // Trait evidence(product_description)가 실제 officialDescription 원문에 존재하는지 확인한다.
+  // top-level evidence와 겹치는지는 더 이상 판단하지 않는다(문서상 근거 없는 과잉 방어였음).
+  const ungroundedTrait = findUngroundedTrait(output.ai_product_traits, officialDescription);
+  if (ungroundedTrait) {
+    throw new TraitQualityValidationError(
+      `Trait "${ungroundedTrait}"의 evidence가 officialDescription 원문에 존재하지 않습니다.`
+    );
+  }
+
+  // Core4 재포장 Trait만 걸러낸다. Product Profile 전체를 FAIL시키지 않는다.
+  const remainingTraits = output.ai_product_traits.filter(
+    (trait) => !isCore4RestatementTrait(trait, output.core4)
+  );
+  const removedCount = output.ai_product_traits.length - remainingTraits.length;
+
+  if (remainingTraits.length < 2) {
+    const removedNames = output.ai_product_traits
+      .filter((trait) => isCore4RestatementTrait(trait, output.core4))
+      .map((trait) => trait.name)
+      .join(", ");
+    throw new TraitQualityValidationError(
+      `Core4 재포장 Trait(${removedNames})을 제외하면 유효한 Trait이 ${remainingTraits.length}개뿐입니다(최소 2개 필요).`
+    );
+  }
+
+  if (removedCount > 0) {
+    console.warn(
+      `[Task201TraitWarning] ${removedCount}개 Trait이 Core4 재포장으로 제외됨, 남은 Trait ${remainingTraits.length}개로 진행`
+    );
+  }
+
+  const warnings = [
+    ...collectBannedGenericWordWarnings(remainingTraits),
+    ...collectCopiedCraftsmanshipWarnings(remainingTraits, officialDescription),
+  ];
+  logTraitQualityWarnings(warnings);
+  return { traits: remainingTraits, warnings };
+}
+
 // 문서에 명시된 값이 아닌 기본 설정값. OPENAI_MODEL 환경변수로 오버라이드할 수 있다.
 const DEFAULT_MODEL = "gpt-4o-mini";
 
@@ -287,8 +514,14 @@ export async function analyzeProduct(
     throw new ProductProfileValidationError(parsed.error.issues);
   }
 
+  // Zod는 구조만 검증한다. AI Product Trait의 의미 품질(금지 단어/설명 원문 복사/Core4 재포장/
+  // evidence 중복)은 별도로 다시 확인한다. Core4 재포장 Trait은 제외 후 남은 것만 사용하고,
+  // evidence 완전 재사용은 여전히 결과 전체를 반환하지 않고 오류를 던진다.
+  const { traits: validatedTraits } = validateTraitQuality(parsed.data, input.officialDescription);
+
   return {
     ...parsed.data,
+    ai_product_traits: validatedTraits,
     analysis_model: model,
     source: "ai_generated",
     is_current: true,

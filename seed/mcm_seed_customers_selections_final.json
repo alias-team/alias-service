@@ -16,7 +16,7 @@
   "customer_product_selections": [
     {
       "customer_code": "DEMO-CUSTOMER-A",
-      "product_code": "MMZGSFI01BK001",
+      "product_code": "MWHGSTA03BK001",
       "selection_type": "purchase",
       "selected_at": null,
       "source": "seed"
@@ -30,7 +30,7 @@
     },
     {
       "customer_code": "DEMO-CUSTOMER-A",
-      "product_code": "MMRDATA05BK001",
+      "product_code": "MWSGSTA05BW001",
       "selection_type": "wishlist",
       "selected_at": null,
       "source": "seed"

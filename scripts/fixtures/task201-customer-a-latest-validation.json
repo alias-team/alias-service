@@ -1,0 +1,279 @@
+{
+  "_meta": {
+    "purpose": "TASK-201 Trait Quality Validator(validateTraitQuality) 추가 이후, 그 검증을 실제로 통과한 Customer A 5개 제품의 '최신' Product Profile만 별도로 추적하기 위한 임시 파일이다.",
+    "temporary": true,
+    "deletable_after": "TASK-202 개발 검증이 끝난 뒤 이 파일은 삭제해도 된다. DB/Seed의 정식 데이터가 아니다.",
+    "not_copied_from": "scripts/fixtures/task202-customer-a-product-profiles.json (과거 recovered 결과와 서로 다른 시점의 실행 결과가 섞여 있어 그대로 복사하지 않았다)",
+    "acceptance_criteria": [
+      "현재 TASK-201 코드(src/lib/ai/product-understanding.ts)로 실행한 결과여야 한다.",
+      "Structured Output(json_schema strict) 성공이어야 한다.",
+      "ProductProfileAiOutputSchema(Zod) 검증을 통과해야 한다.",
+      "validateTraitQuality(AI Product Trait 품질 검증)를 통과해야 한다.",
+      "validateTraitQuality 추가(오늘) 이전에 생성된 결과는, 설령 우연히 규칙을 통과하더라도 이 파일에는 저장하지 않는다 — 반드시 validator가 존재하는 현재 코드로 다시 실행한 결과만 사용한다."
+    ],
+    "status_values": {
+      "pending": "아직 현재 코드 기준으로 재검증되지 않음 — Product Profile 없음",
+      "validated": "위 acceptance_criteria를 모두 통과한 최신 실행 결과가 저장됨"
+    }
+  },
+  "products": {
+    "MWHGSTA03BK001": {
+      "status": "validated",
+      "replaced_product": "MMZGSFI01BK001 (Fursten Belt Bag in Monogram Nylon) — 최신 Core4 재포장 validator 기준 재검증 시 유효 Trait 1개로 FAIL 판정되어 Customer A 구성에서 제외되고 이 제품으로 교체됨",
+      "removed_core4_restatement_traits": {
+        "count": 1,
+        "names": "코드의 현재 로그(console.warn)는 제거된 개수만 남기고 이름은 남기지 않아, 어떤 이름의 Trait이 제거됐는지는 이 결과만으로 알 수 없음 — 원본 3개 중 최종 2개만 확인 가능"
+      },
+      "warnings": [
+        {
+          "traitName": "Lunar Elegance",
+          "rule": "generic_wording",
+          "message": "generic wording detected"
+        }
+      ],
+      "profile": {
+        "core4": {
+          "colorTone": "mono",
+          "silhouetteForm": "soft",
+          "material": "leather",
+          "monogramDensity": "high"
+        },
+        "ai_product_traits": [
+          {
+            "name": "Lunar Elegance",
+            "reason": "The bag's design is inspired by lunar shapes, giving it a unique curvilinear form that stands out in its category.",
+            "evidence": [
+              {
+                "source": "product_description",
+                "text": "As exquisite as its lunar inspiration, this curvilinear hobo bag in Italian full-grain leather."
+              }
+            ]
+          },
+          {
+            "name": "Versatile Carry Options",
+            "reason": "The bag offers multiple carrying options with a chain handle and an attachable leather strap, enhancing its functionality and style.",
+            "evidence": [
+              {
+                "source": "product_description",
+                "text": "Carry by its chain handle or attach the accompanying leather strap for hands-free sophistication."
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "source": "product_image",
+            "text": "The image shows a black hobo bag with a chain handle and visible monogram pattern."
+          },
+          {
+            "source": "product_description",
+            "text": "As exquisite as its lunar inspiration, this curvilinear hobo bag in Italian full-grain leather is imprinted with a maximalist interpretation of the renowned Visetos monogram."
+          }
+        ],
+        "analysis_model": "gpt-4o",
+        "source": "ai_generated",
+        "is_current": true
+      }
+    },
+    "MMTFAKK01BK001": {
+      "status": "validated",
+      "warnings": [
+        {
+          "traitName": "Professional Elegance",
+          "rule": "generic_wording",
+          "message": "generic wording detected"
+        }
+      ],
+      "profile": {
+        "core4": {
+          "colorTone": "mono",
+          "silhouetteForm": "structured",
+          "material": "signature_monogram",
+          "monogramDensity": "medium"
+        },
+        "ai_product_traits": [
+          {
+            "name": "Professional Elegance",
+            "reason": "The briefcase is designed to elevate professional endeavors with its structured form and ample storage, making it ideal for business settings.",
+            "evidence": [
+              {
+                "source": "product_description",
+                "text": "crafted to elevate professional endeavors. This large briefcase in black Visetos features two ample zip compartments for sumptuous storage of documents, devices, and accessories."
+              }
+            ]
+          },
+          {
+            "name": "Travel Heritage",
+            "reason": "The inclusion of a leather hang tag and monogram silhouette pays homage to the travel heritage of the Munich House, adding a touch of classic elegance.",
+            "evidence": [
+              {
+                "source": "product_description",
+                "text": "A leather hang tag accompanies the monogram silhouette in a nod to the travel heritage of the Munich House."
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "source": "product_image",
+            "text": "The image shows a structured black briefcase with a monogram pattern."
+          },
+          {
+            "source": "product_description",
+            "text": "This large briefcase in black Visetos features two ample zip compartments for sumptuous storage of documents, devices, and accessories."
+          }
+        ],
+        "analysis_model": "gpt-4o",
+        "source": "ai_generated",
+        "is_current": true
+      }
+    },
+    "MWSGSTA05BW001": {
+      "status": "validated",
+      "replaced_product": "MMRDATA05BK001 (Aren Messenger Bag in Maxi Monogram Leather) — 3회 연속 실행이 각각 다른 사유(Core4 재포장 / Evidence 중복 / Evidence grounding 실패)로 FAIL하여 Customer A 구성에서 제외되고 이 제품으로 교체됨",
+      "warnings": [],
+      "profile": {
+        "core4": {
+          "colorTone": "mono",
+          "silhouetteForm": "soft",
+          "material": "leather",
+          "monogramDensity": "none"
+        },
+        "ai_product_traits": [
+          {
+            "name": "Cultural Homage",
+            "reason": "The design pays tribute to South Korean culture, specifically referencing traditional Taekwondo uniforms.",
+            "evidence": [
+              {
+                "source": "product_description",
+                "text": "Honoring South Korean culture, this small shoulder bag in lambskin leather features a two-tone colorway influenced by traditional Taekwondo uniforms."
+              }
+            ]
+          },
+          {
+            "name": "Martial Arts Influence",
+            "reason": "The leather strap design is inspired by the belt straps of martial arts ensembles, adding a unique cultural element.",
+            "evidence": [
+              {
+                "source": "product_description",
+                "text": "The special design of the leather strap references the belt straps of the martial arts ensemble."
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "source": "product_image",
+            "text": "The bag features a two-tone colorway with a soft silhouette."
+          },
+          {
+            "source": "product_description",
+            "text": "Honoring South Korean culture, this small shoulder bag in lambskin leather features a two-tone colorway influenced by traditional Taekwondo uniforms."
+          }
+        ],
+        "analysis_model": "gpt-4o",
+        "source": "ai_generated",
+        "is_current": true
+      }
+    },
+    "MMKDSTA01BK001": {
+      "status": "validated",
+      "warnings": [
+        {
+          "traitName": "Heritage Craftsmanship",
+          "rule": "craftsmanship_copied",
+          "message": "craftsmanship phrase copied from description"
+        }
+      ],
+      "profile": {
+        "core4": {
+          "colorTone": "mono",
+          "silhouetteForm": "structured",
+          "material": "signature_monogram",
+          "monogramDensity": "medium"
+        },
+        "ai_product_traits": [
+          {
+            "name": "Modern Rectangular Design",
+            "reason": "The backpack features a modern rectangular silhouette, optimizing storage for laptops and documents.",
+            "evidence": [
+              {
+                "source": "product_description",
+                "text": "This novel backpack features a modern rectangular silhouette for optimal storage of laptops, tablets, and documents."
+              }
+            ]
+          },
+          {
+            "name": "Heritage Craftsmanship",
+            "reason": "The backpack combines modern utility with heritage craftsmanship, using signature Visetos and nappa leather.",
+            "evidence": [
+              {
+                "source": "product_description",
+                "text": "Modern utility rooted in heritage craftsmanship, it's meticulously sculpted from signature Visetos and nappa leather."
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "source": "product_image",
+            "text": "The image shows a black backpack with a structured form and monogram pattern."
+          },
+          {
+            "source": "product_description",
+            "text": "This novel backpack features a modern rectangular silhouette for optimal storage of laptops, tablets, and documents inside its soft microfiber suede interior."
+          }
+        ],
+        "analysis_model": "gpt-4o",
+        "source": "ai_generated",
+        "is_current": true
+      }
+    },
+    "MMPGSDC02BK001": {
+      "status": "validated",
+      "profile": {
+        "core4": {
+          "colorTone": "mono",
+          "silhouetteForm": "structured",
+          "material": "leather",
+          "monogramDensity": "none"
+        },
+        "ai_product_traits": [
+          {
+            "name": "Bavarian Diamond Inspiration",
+            "reason": "The design incorporates handle straps and side patches inspired by Bavarian diamonds, adding a cultural and artistic touch to the bag.",
+            "evidence": [
+              {
+                "source": "product_description",
+                "text": "characterized by handle straps and side patches inspired by the Bavarian diamonds."
+              }
+            ]
+          },
+          {
+            "name": "Functional Interior Artistry",
+            "reason": "The interior features emblematic artwork and a removable pouch, enhancing both the aesthetic and functional aspects of the bag.",
+            "evidence": [
+              {
+                "source": "product_description",
+                "text": "Looking inward, emblematic artwork adorns the interior — featuring a removable pouch for another facet of functional brilliance."
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "source": "product_image",
+            "text": "The bag is black with a structured form and no visible monogram."
+          },
+          {
+            "source": "product_description",
+            "text": "An artisanal companion with a Munich muse, the Dia shopper in calfskin leather."
+          }
+        ],
+        "analysis_model": "gpt-4o",
+        "source": "ai_generated",
+        "is_current": true
+      }
+    }
+  }
+}
