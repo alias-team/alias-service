@@ -59,6 +59,22 @@ export function computeCorePreference(
   return result;
 }
 
+// CorePreference는 index signature가 없는 명시적 인터페이스라, downstream(TASK-204/205)의
+// core_preference: Record<string, unknown> 필드에 이름 있는 CorePreference 변수를 직접
+// 대입하면 TS가 "Index signature is missing"으로 거부한다(별도 `as` 캐스트가 필요해진다).
+// 필드를 하나씩 옮겨 담아 새 object literal을 만들면 TS가 캐스트 없이도 Record<string,
+// unknown>으로 구조적 대입을 허용하므로, 이 함수가 유일하고 명시적인 변환 지점이 된다.
+export function toCorePreferenceRecord(
+  corePreference: CorePreference,
+): Record<string, unknown> {
+  return {
+    colorTone: corePreference.colorTone,
+    silhouetteForm: corePreference.silhouetteForm,
+    material: corePreference.material,
+    monogramDensity: corePreference.monogramDensity,
+  };
+}
+
 // 어떤 제품이 core_preference의 반복 축 중 하나 이상에 실제로 기여했는지 찾는다.
 function productsContributingToCorePreference(
   profiles: SelectedProductProfile[],

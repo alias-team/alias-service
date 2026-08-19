@@ -3,8 +3,13 @@ import { describe, expect, it } from "vitest";
 import {
   computeCorePreference,
   discoverCustomerTaste,
+  toCorePreferenceRecord,
 } from "./customer-taste-discovery";
-import type { CustomerTasteInput, SelectedProductProfile } from "@/types/customer";
+import type {
+  CorePreference,
+  CustomerTasteInput,
+  SelectedProductProfile,
+} from "@/types/customer";
 
 const profiles: SelectedProductProfile[] = [
   {
@@ -73,6 +78,26 @@ describe("computeCorePreference", () => {
     ];
     const result = computeCorePreference(withArray);
     expect(result.material).toEqual(["leather"]); // leather 2회(배열 원소 + 단일), signature_monogram 1회
+  });
+});
+
+describe("toCorePreferenceRecord", () => {
+  it("모든 축 값을 그대로 보존한 채 Record<string, unknown>으로 옮겨 담는다", () => {
+    const corePreference: CorePreference = {
+      colorTone: ["mono"],
+      silhouetteForm: ["structured"],
+      material: ["leather", "signature_monogram"],
+      monogramDensity: [],
+    };
+
+    const result: Record<string, unknown> = toCorePreferenceRecord(corePreference);
+
+    expect(result).toEqual({
+      colorTone: ["mono"],
+      silhouetteForm: ["structured"],
+      material: ["leather", "signature_monogram"],
+      monogramDensity: [],
+    });
   });
 });
 
