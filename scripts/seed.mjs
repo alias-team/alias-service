@@ -125,7 +125,11 @@ function buildProductRows() {
     name: p.product_name,
     official_description: p.description,
     image_url: p.image_url,
-    metadata: { category: p.category ?? null, officialColor: p.color_name ?? null },
+    metadata: {
+      category: p.category ?? null,
+      officialColor: p.color_name ?? null,
+      rawMaterialText: p.material ?? null,
+    },
     source: "seed",
   }));
 }
