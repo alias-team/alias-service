@@ -14,6 +14,7 @@ import { getOpenAIClient } from "./openai-client.ts";
 import {
   ProductProfileAiOutputSchema,
   ProductProfileValidationError,
+  productProfileAiJsonSchema,
   type ProductProfileAiOutput,
   // @ts-expect-error TS5097: 위와 동일한 이유로 명시적 .ts 확장자를 유지한다.
 } from "./product-profile.schema.ts";
@@ -99,7 +100,7 @@ function buildSystemPrompt(): string {
 - 특히 "Craftsmanship"은 name에 기본값처럼 쓰지 않는다. Description에 craftsmanship, artisanal, exquisite craftsmanship 같은 표현이 실제로 등장하더라도, 그 단어를 그대로 옮기거나 요약해 name으로 쓰지 않는다. 그 문장이 가리키는 더 구체적인 대상(예: 특정 디테일, 마감 방식, 소재 조합 자체)이 있다면 그 구체적 대상으로 표현하고, 그럴 만한 새로운 관찰이 없다면 이 문구는 Trait 근거로 사용하지 않는다.
 - 금지: Product Description의 문장을 거의 그대로 옮겨 name이나 reason으로 쓰는 것. name/reason은 이미지와 Description을 종합해서 만든 해석이어야 하며, 원문 문장을 살짝 바꾸는 수준의 재구성이 아니어야 한다. 원문 표현은 evidence의 text에만 인용한다. 특히 craftsmanship/artisanal 계열의 일반적인 품질 자랑 문구는 요약하지 말고, Trait의 근거로 삼을 만한 다른 구체적 문장이 없는지 먼저 찾는다.
 - 금지: Core4 판정에 사용한 것과 같은 Evidence를 문장만 바꿔 그대로 Trait의 근거로 재사용하는 것. 특히 monogram/density, material, color, silhouette 자체를 가리키는 문장(예: 모노그램이 어디에 어떻게 쓰였는지, 소재가 무엇인지)만으로 Trait을 만들지 않는다. Trait은 Core4 축 판정에 쓴 것과 별개로, Core4가 다루지 않는 새로운 관찰(구조, 사용 방식, 문화적 참조, 디자인 서사 등)에 근거해야 한다.
-- 각 Trait은 "이 제품이 다른 제품과 무엇이 다른가"를 한 문장으로 답할 수 있어야 한다. 답할 수 없다면 그 Trait은 만들지 않는다.
+- 각 Trait은 "이 제품이 다른 제품과 무엇이 다른가"를 한 문장으로 답할 수 있어야 한다. ai_product_traits는 반드시 2~3개를 채워야 하며, 개수가 부족하다는 이유로 Trait 생성을 생략하지 않는다 — 아래 금지 규칙을 지키는 범위 안에서 이미지와 설명을 다시 살펴 서로 다른 근거(구조, 사용 방식, 문화적 참조, 디자인 서사 등)를 최소 2개 찾아낸다.
 - 각 Trait은 name, reason, evidence(최소 1개, {source, text})로 구성한다.
 - reason은 이미지/설명에서 실제로 확인되는 근거에 기반해야 하며, 근거 없는 브랜드 의미를 부여하지 않는다.
 - evidence.source는 "product_image" 또는 "product_description" 중 하나만 사용한다.
@@ -108,7 +109,7 @@ function buildSystemPrompt(): string {
 - Core4 판정을 뒷받침하는 근거를 최소 1개 이상 {source, text} 형태로 포함한다.
 
 # 출력 형식
-다른 설명 없이 아래 JSON 형식만 정확히 반환한다.
+다른 설명 없이 아래 JSON 형식만 정확히 반환한다. ai_product_traits 배열은 반드시 2개 이상 3개 이하여야 한다.
 
 {
   "core4": {
@@ -207,13 +208,25 @@ interface VisionJsonRequest {
 // 공용 openai-client.ts(getOpenAIClient)의 SDK 인스턴스를 사용해 Vision + JSON 응답을 요청한다.
 // 모델 선택, 요청 형태(vision/JSON mode)는 Product Understanding 고유 관심사라 공용 client
 // 파일이 아니라 이 파일 안에서 다룬다 (event-meaning-analysis.ts와 동일한 패턴).
+//
+// response_format은 plain json_object가 아니라 OpenAI Structured Outputs(json_schema, strict)를
+// 사용한다 — product-profile.schema.ts의 productProfileAiJsonSchema가 ai_product_traits
+// 2~3개(그 외 core4/evidence 구조)를 API 출력 단계에서부터 강제하며, 이후 Zod 검증과
+// 동일한 제약을 이중으로 적용한다.
 async function callVisionJson(req: VisionJsonRequest): Promise<{ data: unknown; model: string }> {
   const model = process.env.OPENAI_MODEL ?? DEFAULT_MODEL;
 
   const response = await getOpenAIClient().chat.completions.create({
     model,
     temperature: req.temperature ?? 0,
-    response_format: { type: "json_object" },
+    response_format: {
+      type: "json_schema",
+      json_schema: {
+        name: "product_profile",
+        strict: true,
+        schema: productProfileAiJsonSchema,
+      },
+    },
     messages: [
       { role: "system", content: req.systemPrompt },
       {
