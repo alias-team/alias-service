@@ -1,0 +1,56 @@
+[
+  {
+    "id": "email-001",
+    "sender": "MCM Editorial Team",
+    "subject": "Your Personal MCM Issue 01 has arrived",
+    "preview": "Discover a new chapter inspired by your taste and the pieces selected for you.",
+    "received_at": "Aug 19",
+    "is_read": false,
+    "is_editorial": true
+  },
+  {
+    "id": "email-002",
+    "sender": "MCM Client Services",
+    "subject": "Your MCM account update",
+    "preview": "Your customer profile preferences were updated successfully.",
+    "received_at": "Aug 18",
+    "is_read": true,
+    "is_editorial": false
+  },
+  {
+    "id": "email-003",
+    "sender": "MCM Store Seoul",
+    "subject": "A private appointment invitation",
+    "preview": "Reserve a personal appointment to explore the latest collection in store.",
+    "received_at": "Aug 16",
+    "is_read": true,
+    "is_editorial": false
+  },
+  {
+    "id": "email-004",
+    "sender": "MCM Membership",
+    "subject": "Your membership benefits this month",
+    "preview": "Explore the services and experiences currently available to you.",
+    "received_at": "Aug 14",
+    "is_read": false,
+    "is_editorial": false
+  },
+  {
+    "id": "email-005",
+    "sender": "MCM Client Services",
+    "subject": "Care guidance for your MCM piece",
+    "preview": "A few considered steps can help preserve the character of your item.",
+    "received_at": "Aug 11",
+    "is_read": true,
+    "is_editorial": false
+  },
+  {
+    "id": "email-006",
+    "sender": "MCM Store Seoul",
+    "subject": "Thank you for your recent visit",
+    "preview": "We hope your time with us offered a memorable introduction to the collection.",
+    "received_at": "Aug 08",
+    "is_read": true,
+    "is_editorial": false
+  }
+]
