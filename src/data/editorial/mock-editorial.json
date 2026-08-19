@@ -1,0 +1,63 @@
+{
+  "email_header": {
+    "sender": "MCM Editorial Team",
+    "subject": "Heritage, Set in Motion",
+    "preview": "A personal edit of modern MCM icons."
+  },
+  "editorial": {
+    "cover": {
+      "title": "Heritage in Motion",
+      "subtitle": "A contemporary MCM chapter",
+      "hero_message": "Familiar codes find a new rhythm through pieces selected for the way you move."
+    },
+    "opening_message": {
+      "title": "A Familiar Point of Departure",
+      "content": "Your preference for refined heritage forms meets a more fluid expression of modern utility."
+    },
+    "brand_story": {
+      "story_type": "collection",
+      "image_url": "https://placehold.co/1200x800/ddd5c8/746d63?text=MCM+Editorial",
+      "title": "A New Movement",
+      "content": "MCM heritage is carried into a contemporary urban context, balancing recognizable codes with an instinct for movement."
+    },
+    "discovery_chapters": [
+      {
+        "chapter_title": "Icons for the Everyday",
+        "chapter_intro": "Two familiar silhouettes translate the collection theme into distinct daily rhythms.",
+        "products": [
+          {
+            "product_id": "MCM-BAG-001",
+            "product_name": "Aren Shopper in Visetos",
+            "image_url": "https://placehold.co/900x900/e4ddd1/746d63?text=Aren+Shopper",
+            "discovery_story": "The open silhouette brings ease and clarity to a signature Visetos expression.",
+            "connection_reason": "Its structured simplicity reflects your preference for recognizable forms with practical range."
+          },
+          {
+            "product_id": "MCM-BAG-002",
+            "product_name": "Stark Backpack in Visetos",
+            "image_url": "https://placehold.co/900x900/d7cdbf/746d63?text=Stark+Backpack",
+            "discovery_story": "A house icon is reframed around movement, proportion, and everyday utility.",
+            "connection_reason": "The balance of heritage pattern and functional shape extends your affinity for polished utility."
+          }
+        ]
+      },
+      {
+        "chapter_title": "A Lighter Counterpoint",
+        "chapter_intro": "A reversible construction introduces a more adaptable expression of the same visual language.",
+        "products": [
+          {
+            "product_id": "MCM-ACC-003",
+            "product_name": "Reversible Liz Shopper",
+            "image_url": "https://placehold.co/900x900/cfc4b5/746d63?text=Liz+Shopper",
+            "discovery_story": "Two finishes allow the silhouette to shift with the context while retaining its essential character.",
+            "connection_reason": "Its versatility connects your established taste to a more relaxed and adaptable direction."
+          }
+        ]
+      }
+    ],
+    "closing_message": {
+      "content": "A familiar sensibility, seen through a new MCM expression.",
+      "cta_label": "Discover the Collection"
+    }
+  }
+}
