@@ -12,13 +12,13 @@ export function HeroSection({ hero, openingMessage }: HeroSectionProps) {
     <section data-editorial-component="HeroSection" aria-label="Editorial hero image">
       <table role="presentation" width="100%" cellPadding="0" cellSpacing="0"><tbody><tr>
         <td style={sectionCellStyle}>
-          <div style={{ marginBottom: "40px" }}><EditorialImage alt="Editorial hero" height={680} src={hero.image_url} /></div>
+          <div style={{ marginBottom: "36px" }}><EditorialImage alt="Editorial hero" height={720} src={hero.image_url} /></div>
           <table role="presentation" width="100%" cellPadding="0" cellSpacing="0"><tbody><tr>
-            <td valign="top" width="50%" style={{ paddingRight: "40px" }}>
-              <h2 style={{ color: colors.ink, fontFamily: fonts.display, fontSize: "38px", fontWeight: 400, lineHeight: 1.15, margin: 0 }}>{openingMessage.title}</h2>
+            <td valign="middle" width="44%" style={{ paddingRight: "48px" }}>
+              <h2 style={{ color: colors.ink, fontFamily: fonts.display, fontSize: "46px", fontWeight: 700, letterSpacing: "-0.025em", lineHeight: 1.02, margin: 0 }}>{openingMessage.title}</h2>
             </td>
-            <td valign="top" width="50%" style={{ paddingLeft: "40px" }}>
-              <p style={{ color: colors.body, fontFamily: fonts.editorial, fontSize: "16px", lineHeight: 1.85, margin: 0 }}>{openingMessage.content}</p>
+            <td valign="middle" width="56%" style={{ borderLeft: `1px solid ${colors.line}`, paddingLeft: "48px" }}>
+              <p style={{ color: colors.body, fontFamily: fonts.editorial, fontSize: "19px", fontWeight: 400, letterSpacing: "0.005em", lineHeight: 1.8, margin: 0 }}>{openingMessage.content}</p>
             </td>
           </tr></tbody></table>
         </td>

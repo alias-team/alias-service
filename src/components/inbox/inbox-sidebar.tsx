@@ -24,7 +24,7 @@ export function InboxSidebar() {
   return (
     <aside
       data-inbox-component="Sidebar"
-      className="w-64 shrink-0 overflow-y-auto bg-white px-2 pb-5 pt-2"
+      className="w-64 shrink-0 overflow-y-auto bg-[#F8FAFC] px-2 pb-5 pt-2"
     >
       <button
         type="button"

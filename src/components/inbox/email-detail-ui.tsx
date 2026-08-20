@@ -73,7 +73,7 @@ export function EmailDetailUI({ email, editorial }: EmailDetailUIProps) {
               </div>
 
               <div className="mb-6 flex items-start gap-4">
-                <div className="grid size-10 shrink-0 place-items-center rounded-full bg-[#5f6368] text-xs font-semibold text-white">
+                <div className="grid size-10 shrink-0 place-items-center rounded-full bg-[#A4612A] text-xs font-semibold text-white">
                   MCM
                 </div>
                 <div className="min-w-0 flex-1">

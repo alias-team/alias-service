@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import {
+  Bodoni_Moda,
   Cormorant_Garamond,
   Geist,
   Geist_Mono,
-  Jost,
+  Inter,
   Playfair_Display,
 } from "next/font/google";
 import "./globals.css";
@@ -21,17 +22,23 @@ const geistMono = Geist_Mono({
 const editorialDisplay = Playfair_Display({
   variable: "--font-editorial-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "700"],
   style: ["normal", "italic"],
+});
+
+const editorialIssue = Bodoni_Moda({
+  variable: "--font-editorial-issue",
+  subsets: ["latin"],
+  weight: ["700"],
 });
 
 const editorialSerif = Cormorant_Garamond({
   variable: "--font-editorial-serif",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "600"],
 });
 
-const editorialSans = Jost({
+const editorialSans = Inter({
   variable: "--font-editorial-sans",
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -46,7 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${editorialDisplay.variable} ${editorialSerif.variable} ${editorialSans.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${editorialDisplay.variable} ${editorialIssue.variable} ${editorialSerif.variable} ${editorialSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

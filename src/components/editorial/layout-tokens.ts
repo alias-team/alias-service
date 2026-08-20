@@ -16,7 +16,8 @@ export const colors = {
 export const fonts = {
   display: "var(--font-editorial-display), Georgia, serif",
   editorial: "var(--font-editorial-serif), Georgia, serif",
+  issue: "var(--font-editorial-issue), Georgia, serif",
   sans: "var(--font-editorial-sans), Arial, sans-serif",
 } as const;
 
-export const sectionCellStyle: CSSProperties = { padding: "56px 96px 72px" };
+export const sectionCellStyle: CSSProperties = { padding: "52px 96px 64px" };

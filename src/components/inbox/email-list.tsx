@@ -114,9 +114,10 @@ export function EmailList({ emails }: EmailListProps) {
     <section
       data-inbox-component="EmailList"
       aria-label="Email list"
-      className="flex min-h-0 flex-1 flex-col overflow-hidden bg-white"
+      className="flex min-h-0 flex-1 flex-col overflow-hidden bg-[#f6f8fc] px-4 pb-4"
     >
-      <div className="flex h-[52px] shrink-0 items-center gap-1.5 px-3 text-[#5f6368]">
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+        <div className="flex h-[52px] shrink-0 items-center gap-1.5 rounded-2xl px-3 text-[#5f6368]">
         <button type="button" aria-label="Select all emails" className="grid size-[38px] place-items-center rounded-full hover:bg-[#f1f3f4]">
           <span className="size-[18px] rounded-[3px] border-[1.6px] border-[#5f6368]" aria-hidden="true" />
         </button>
@@ -141,9 +142,9 @@ export function EmailList({ emails }: EmailListProps) {
             <span aria-hidden="true" className="text-[10px]">⌄</span>
           </button>
         </div>
-      </div>
+        </div>
 
-      <nav aria-label="Mail categories" className="flex h-12 shrink-0 border-b border-[#e8eaed]">
+        <nav aria-label="Mail categories" className="flex h-12 shrink-0 border-b border-[#e8eaed]">
         <a href="#primary" aria-label="Primary" aria-current="page" className="relative flex shrink-0 items-center gap-2.5 bg-[#e8f0fe] px-5 text-sm font-semibold text-[#1a73e8] after:absolute after:inset-x-0 after:bottom-0 after:h-[3px] after:bg-[#1a73e8]">
           <Inbox className="size-[18px]" aria-hidden="true" />
           <span>기본</span>
@@ -164,12 +165,13 @@ export function EmailList({ emails }: EmailListProps) {
           <span className="shrink-0 rounded-[10px] bg-[#e8710a] px-2 py-0.5 text-[11px] font-bold text-white">새 메일 4개</span>
           <span className="truncate text-xs font-normal">팀 매니패스트 — 매니패스트 2.0</span>
         </a>
-      </nav>
+        </nav>
 
-      <div className="min-h-0 flex-1 overflow-y-auto">
-        {emails.map((email) => (
-          <EmailRow key={email.id} email={email} />
-        ))}
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          {emails.map((email) => (
+            <EmailRow key={email.id} email={email} />
+          ))}
+        </div>
       </div>
     </section>
   );
