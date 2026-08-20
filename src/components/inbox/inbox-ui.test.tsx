@@ -4,6 +4,15 @@ import { describe, expect, it } from "vitest";
 import mockEmails from "@/data/email/mock-emails.json";
 import { InboxUI } from "./inbox-ui";
 
+function escapeMarkupText(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#x27;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
 describe("InboxUI", () => {
   it("renders the Gmail-style inbox shell and category navigation", () => {
     const markup = renderToStaticMarkup(<InboxUI emails={mockEmails} />);
@@ -33,10 +42,11 @@ describe("InboxUI", () => {
 
     let previousIndex = -1;
     for (const email of mockEmails) {
-      const currentIndex = markup.indexOf(email.subject);
+      const escapedSubject = escapeMarkupText(email.subject);
+      const currentIndex = markup.indexOf(escapedSubject);
 
       expect(markup).toContain(email.sender);
-      expect(markup).toContain(email.preview);
+      expect(markup).toContain(escapeMarkupText(email.preview));
       expect(currentIndex).toBeGreaterThan(previousIndex);
       previousIndex = currentIndex;
     }

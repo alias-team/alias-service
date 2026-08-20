@@ -32,11 +32,11 @@ export function EmailDetailUI({ email, editorial }: EmailDetailUIProps) {
   const showEditorial = email.id === "email-001" && email.is_editorial;
 
   return (
-    <div className="flex min-h-screen min-w-[1024px] bg-[#f6f8fc] font-sans text-[#202124]">
-      <InboxSidebar />
-      <div className="flex min-w-0 flex-1 flex-col">
-        <InboxHeader />
-        <main className="min-h-0 flex-1 px-4 pb-4">
+    <div className="flex min-h-screen min-w-[1024px] flex-col bg-white text-[#202124] [font-family:Arial,Helvetica,sans-serif]">
+      <InboxHeader />
+      <div className="flex min-h-0 flex-1">
+        <InboxSidebar />
+        <main className="min-h-0 min-w-0 flex-1 bg-[#f6f8fc] px-4 pb-4">
           <article
             data-inbox-component="EmailDetail"
             className="min-h-full overflow-hidden rounded-2xl bg-white shadow-sm"

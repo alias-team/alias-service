@@ -1,13 +1,19 @@
-import { EditorialEmail } from "@/components/editorial/editorial-email";
-import mockEditorial from "@/data/editorial/mock-editorial.json";
-import { personalEditorialSchema } from "@/lib/validation/editorial.schema";
-
-const editorialData = personalEditorialSchema.parse(mockEditorial);
+import { CTASection } from "@/components/landing/cta-section";
+import { HeroSection } from "@/components/landing/hero-section";
+import { IntelligenceSection } from "@/components/landing/intelligence-section";
+import { landingFontVariables } from "@/components/landing/landing-fonts";
+import { StorySection } from "@/components/landing/story-section";
 
 export default function Home() {
   return (
-    <main aria-label="Editorial email layout preview">
-      <EditorialEmail data={editorialData} />
+    <main
+      aria-label="MCM Personal Editorial Engine"
+      className={landingFontVariables}
+    >
+      <HeroSection />
+      <IntelligenceSection />
+      <StorySection />
+      <CTASection />
     </main>
   );
 }
