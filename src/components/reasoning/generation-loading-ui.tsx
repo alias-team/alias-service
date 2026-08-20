@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const generationSteps = [
@@ -37,7 +38,7 @@ export function GenerationLoadingUI({
 
   useEffect(() => {
     const timers = [
-      window.setTimeout(() => setActiveStep(1), 3000),
+      window.setTimeout(() => setActiveStep(1), 2000),
       window.setTimeout(() => setActiveStep(2), 6000),
       window.setTimeout(() => setActiveStep(3), 9000),
       window.setTimeout(() => {
@@ -60,13 +61,22 @@ export function GenerationLoadingUI({
       data-run-id={runId}
       data-generation-complete={isComplete}
       className={[
-        "relative flex min-h-svh items-center justify-center overflow-hidden bg-[#111111] bg-[url('/images/reasoning/mcm-wallpaper-dark.jpg')] bg-cover bg-center px-6 transition-opacity duration-1000 ease-in-out [font-family:var(--font-landing-sans)] lg:h-[900px]",
+        "relative flex min-h-svh items-center justify-center overflow-hidden bg-[#1A1410] px-6 transition-opacity duration-1000 ease-in-out [font-family:var(--font-landing-sans)] lg:h-[900px]",
         isExiting ? "opacity-0" : "opacity-100",
       ].join(" ")}
     >
+      <div aria-hidden="true" className="absolute inset-0 scale-110">
+        <Image
+          fill
+          alt=""
+          src="/images/reasoning/mcm-wallpaper.png"
+          sizes="100vw"
+          className="object-cover object-center blur-[7px]"
+        />
+      </div>
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_65%_65%_at_50%_50%,rgba(8,5,3,0.68)_0%,rgba(8,5,3,0.95)_100%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_72%_68%_at_50%_42%,rgba(18,12,8,0.52)_0%,rgba(12,8,6,0.78)_58%,rgba(8,5,3,0.9)_100%)]"
       />
 
       <div className="relative z-10 flex w-full flex-col items-center justify-center gap-14 px-0 text-center sm:px-10">
@@ -81,13 +91,6 @@ export function GenerationLoadingUI({
             A personal magazine crafted from your choices and MCM&apos;s world
           </p>
         </header>
-
-        <div
-          aria-hidden="true"
-          className="animate-pulse text-xl text-[#C8A66B]"
-        >
-          ✦
-        </div>
 
         <div className="flex w-full max-w-[960px] flex-col items-center sm:flex-row sm:items-start">
           {generationSteps.map((step, index) => {
@@ -154,10 +157,6 @@ export function GenerationLoadingUI({
             );
           })}
         </div>
-
-        <p className="[font-family:var(--font-landing-serif)] text-lg font-semibold tracking-[0.16em] text-[#C8A66B]">
-          MCM
-        </p>
       </div>
 
       <p className="sr-only" aria-live="polite">
