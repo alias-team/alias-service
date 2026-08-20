@@ -124,6 +124,8 @@ describe("evaluateGatekeeper", () => {
           source.candidates[0].customer_product_match.matching_reason,
         meaning_bridge: source.candidates[0].meaning_bridge,
         extension: source.candidates[0].extension_result.extension_reason,
+        existing_preference: source.candidates[0].extension_result.existing_preference,
+        new_expression: source.candidates[0].extension_result.new_expression,
         evidence: [
           ...source.customer_event_match.evidence,
           ...source.candidates[0].customer_product_match.evidence,
