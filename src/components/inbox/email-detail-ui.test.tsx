@@ -36,8 +36,8 @@ describe("EmailDetailUI", () => {
     expect(markup).toContain("MCM Editorial Team");
     expect(markup).toContain("editorial@mcmworldwide.com");
     expect(markup).toContain("to me");
-    expect(markup).toContain("Your Personal MCM Issue 01 has arrived");
-    expect(markup).toContain("Aug 19");
+    expect(markup).toContain(mockEmails[0].subject);
+    expect(markup).toContain(mockEmails[0].received_at);
   });
 
   it("renders the existing TASK-403 editorial renderer for email-001", () => {
@@ -53,11 +53,9 @@ describe("EmailDetailUI", () => {
       <EmailDetailUI email={mockEmails[1]} editorial={editorial} />,
     );
 
-    expect(markup).toContain("MCM Client Services");
-    expect(markup).toContain("Your MCM account update");
-    expect(markup).toContain(
-      "Your customer profile preferences were updated successfully.",
-    );
+    expect(markup).toContain(mockEmails[1].sender);
+    expect(markup).toContain(mockEmails[1].subject);
+    expect(markup).toContain(mockEmails[1].preview);
     expect(markup).not.toContain('data-editorial-container="true"');
   });
 });

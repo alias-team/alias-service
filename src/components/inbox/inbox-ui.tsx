@@ -9,11 +9,11 @@ type InboxUIProps = {
 
 export function InboxUI({ emails }: InboxUIProps) {
   return (
-    <div className="flex min-h-screen min-w-[1024px] bg-[#f6f8fc] font-sans text-[#202124]">
-      <InboxSidebar />
-      <div className="flex min-w-0 flex-1 flex-col">
-        <InboxHeader />
-        <main className="min-h-0 flex-1 px-4 pb-4">
+    <div className="flex h-screen min-w-[1024px] flex-col overflow-hidden bg-white text-[#1f1f1f] [font-family:Arial,Helvetica,sans-serif]">
+      <InboxHeader />
+      <div className="flex min-h-0 flex-1">
+        <InboxSidebar />
+        <main className="flex min-w-0 flex-1 flex-col overflow-hidden bg-white">
           <EmailList emails={emails} />
         </main>
       </div>

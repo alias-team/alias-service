@@ -4,52 +4,160 @@
     "sender": "MCM Editorial Team",
     "subject": "Your Personal MCM Issue 01 has arrived",
     "preview": "Discover a new chapter inspired by your taste and the pieces selected for you.",
-    "received_at": "Aug 19",
+    "received_at": "오후 2:14",
     "is_read": false,
     "is_editorial": true
   },
   {
     "id": "email-002",
-    "sender": "MCM Client Services",
-    "subject": "Your MCM account update",
-    "preview": "Your customer profile preferences were updated successfully.",
-    "received_at": "Aug 18",
-    "is_read": true,
+    "sender": "Supabase",
+    "subject": "Add social logins in minutes",
+    "preview": "Google, GitHub, Twitter, Apple, and more.",
+    "received_at": "오후 1:01",
+    "is_read": false,
     "is_editorial": false
   },
   {
     "id": "email-003",
-    "sender": "MCM Store Seoul",
-    "subject": "A private appointment invitation",
-    "preview": "Reserve a personal appointment to explore the latest collection in store.",
-    "received_at": "Aug 16",
-    "is_read": true,
+    "sender": "Cursor Team",
+    "subject": "Increased included usage and update to Auto pricing",
+    "preview": "Cursor Cursor Cursor Hi there, We are updating how Auto is priced a...",
+    "received_at": "오전 1:06",
+    "is_read": false,
     "is_editorial": false
   },
   {
     "id": "email-004",
-    "sender": "MCM Membership",
-    "subject": "Your membership benefits this month",
-    "preview": "Explore the services and experiences currently available to you.",
-    "received_at": "Aug 14",
+    "sender": "Confluence",
+    "subject": "재이님이 \"8/19 회의록\"에서 사용자를 멘션",
+    "preview": "재이 님이 라이브 문서에서 귀하를 멘션했습니다 8/19 회의록 mentioner-avatar 재이 님이 귀하를...",
+    "received_at": "8월 19일",
     "is_read": false,
     "is_editorial": false
   },
   {
     "id": "email-005",
-    "sender": "MCM Client Services",
-    "subject": "Care guidance for your MCM piece",
-    "preview": "A few considered steps can help preserve the character of your item.",
-    "received_at": "Aug 11",
-    "is_read": true,
+    "sender": "Confluence",
+    "subject": "이성경 님, 팀에서 이 페이지에 대해 작업하고 있습니다. 대화에 참여하세요",
+    "preview": "사용자 및 해당 업무와 연결된 상태 유지 주간 콘텐츠 추천 사항을 탐...",
+    "received_at": "8월 19일",
+    "is_read": false,
     "is_editorial": false
   },
   {
     "id": "email-006",
-    "sender": "MCM Store Seoul",
-    "subject": "Thank you for your recent visit",
-    "preview": "We hope your time with us offered a memorable introduction to the collection.",
-    "received_at": "Aug 08",
+    "sender": "Google",
+    "subject": "Google 계정 데이터 일부를 산돌구름에 공유하셨습니다",
+    "preview": "Google 계정 데이터 추적 mealkuo@gmail.com 'Google 계정으로 로그인'을 사용...",
+    "received_at": "8월 19일",
+    "is_read": false,
+    "is_editorial": false
+  },
+  {
+    "id": "email-007",
+    "sender": "Supabase",
+    "subject": "Have you tried Supabase Auth?",
+    "preview": "Add secure sign-in without extra tools.",
+    "received_at": "8월 19일",
+    "is_read": false,
+    "is_editorial": false
+  },
+  {
+    "id": "email-008",
+    "sender": "Cursor Team",
+    "subject": "Cursor code hosting is here",
+    "preview": "Origin, our code hosting platform, is available in early beta, and included in your paid plan. ...",
+    "received_at": "8월 19일",
+    "is_read": false,
+    "is_editorial": false
+  },
+  {
+    "id": "email-009",
+    "sender": "Google",
+    "subject": "Google 계정 데이터 일부를 genspark.ai에 공유하셨습니다",
+    "preview": "Google 계정 데이터 추적 mealkuo@gmail.com 'Google 계정으로 로그인'...",
+    "received_at": "8월 18일",
+    "is_read": false,
+    "is_editorial": false
+  },
+  {
+    "id": "email-010",
+    "sender": "team",
+    "subject": "Genspark에 오신 것을 환영합니다 — AI 워크스페이스가 준비되었습니다.",
+    "preview": "올인원 AI 워크스페이스가 준비되었습니다. 슬라이드, 문서, 리서치...",
+    "received_at": "8월 18일",
+    "is_read": false,
+    "is_editorial": false
+  },
+  {
+    "id": "email-011",
+    "sender": "Supabase",
+    "subject": "young11756 has invited you to join an organization",
+    "preview": "You have been invited to join hotdog",
+    "received_at": "8월 18일",
+    "is_read": false,
+    "is_editorial": false
+  },
+  {
+    "id": "email-012",
+    "sender": "Admin (Jira)",
+    "subject": "[Jira] A friendly reminder: Your space(s) will be permanently deleted from trash",
+    "preview": "프로젝트가 7일 후에 영구적으로 삭제됩니...",
+    "received_at": "8월 15일",
+    "is_read": true,
+    "is_editorial": false
+  },
+  {
+    "id": "email-013",
+    "sender": "Choi, Yongho",
+    "subject": "[멋사 해커톤 | AWS] AI 코딩 도구 Kiro 크레딧 제공",
+    "preview": "안녕하세요. 멋사대학 중앙해커톤에 참석하시는 여러분들! AWS 테크에반젤리스트 최용호 ...",
+    "received_at": "8월 14일",
+    "is_read": true,
+    "is_editorial": false
+  },
+  {
+    "id": "email-014",
+    "sender": "가비아",
+    "subject": "[가비아 클라우드] 외부망 라우팅 규칙이 추가되었습니다.",
+    "preview": "[가비아 클라우드] 외부망 라우팅 규칙이 추가되었습니다. 안녕하세요, 이*경님. 가비...",
+    "received_at": "8월 13일",
+    "is_read": true,
+    "is_editorial": false
+  },
+  {
+    "id": "email-015",
+    "sender": "가비아",
+    "subject": "[가비아 클라우드] 서브넷이 생성되었습니다",
+    "preview": "[가비아 클라우드] 서브넷이 생성되었습니다 안녕하세요, 이*경님. 가비아 클라우드입니다. 서브넷 ...",
+    "received_at": "8월 13일",
+    "is_read": true,
+    "is_editorial": false
+  },
+  {
+    "id": "email-016",
+    "sender": "가비아",
+    "subject": "[가비아 클라우드] VPC가 생성되었습니다",
+    "preview": "[가비아 클라우드] VPC가 생성되었습니다 안녕하세요, 이*경님. 가비아 클라우드입니다. VPC 생성...",
+    "received_at": "8월 13일",
+    "is_read": true,
+    "is_editorial": false
+  },
+  {
+    "id": "email-017",
+    "sender": "가비아",
+    "subject": "[가비아 클라우드] 서비스 신청이 완료되었습니다.",
+    "preview": "[가비아 클라우드] 서비스 신청이 완료되었습니다. 안녕하세요. 이성경 님 가비아 클라우드 서...",
+    "received_at": "8월 13일",
+    "is_read": true,
+    "is_editorial": false
+  },
+  {
+    "id": "email-018",
+    "sender": "가비아",
+    "subject": "[가비아 클라우드] 프로젝트가 생성되었습니다",
+    "preview": "[가비아 클라우드] 프로젝트가 생성되었습니다 안녕하세요, 이성경님. 가비아 클라우드입니다. ...",
+    "received_at": "8월 13일",
     "is_read": true,
     "is_editorial": false
   }

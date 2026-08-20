@@ -1,12 +1,22 @@
 import type { CSSProperties } from "react";
 
 export const colors = {
-  canvas: "#e8e4dc",
-  paper: "#fffdf8",
-  ink: "#26231f",
+  canvas: "#efece5",
+  paper: "#F6F3EE",
+  ink: "#111111",
   muted: "#746d63",
-  line: "#c8bda9",
-  placeholder: "#ddd5c8",
+  body: "#4a463e",
+  line: "#D7C6A5",
+  cognac: "#A4612A",
+  gold: "#C8A66B",
+  charcoal: "#2A2A2A",
+  placeholder: "#D7C6A5",
 } as const;
 
-export const sectionCellStyle: CSSProperties = { padding: "40px 48px" };
+export const fonts = {
+  display: "var(--font-editorial-display), Georgia, serif",
+  editorial: "var(--font-editorial-serif), Georgia, serif",
+  sans: "var(--font-editorial-sans), Arial, sans-serif",
+} as const;
+
+export const sectionCellStyle: CSSProperties = { padding: "56px 96px 72px" };
