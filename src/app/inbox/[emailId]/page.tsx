@@ -1,25 +1,24 @@
 import { notFound } from "next/navigation";
 
 import { EmailDetailUI } from "@/components/inbox/email-detail-ui";
-import mockEditorial from "@/data/editorial/mock-editorial.json";
 import mockEmails from "@/data/email/mock-emails.json";
-import { personalEditorialSchema } from "@/lib/validation/editorial.schema";
+import { loadDemoPersonalEditorial } from "@/features/editorial/demo-editorial";
 
-const editorial = personalEditorialSchema.parse(mockEditorial);
+export const dynamic = "force-dynamic";
 
 type EmailDetailPageProps = {
   params: Promise<{ emailId: string }>;
 };
 
-export function generateStaticParams() {
-  return mockEmails.map((email) => ({ emailId: email.id }));
-}
-
 export default async function EmailDetailPage({ params }: EmailDetailPageProps) {
   const { emailId } = await params;
-  const email = mockEmails.find((candidate) => candidate.id === emailId);
+  const demo = await loadDemoPersonalEditorial();
+  const email =
+    demo.email.id === emailId
+      ? demo.email
+      : mockEmails.find((candidate) => candidate.id === emailId);
 
   if (!email) notFound();
 
-  return <EmailDetailUI email={email} editorial={editorial} />;
+  return <EmailDetailUI email={email} editorial={demo.editorial} />;
 }

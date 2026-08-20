@@ -1,11 +1,17 @@
 import type { ProductStoryData } from "@/types/editorial-ui";
-import { EditorialImage } from "./editorial-image";
+import {
+  EditorialImage,
+  PRODUCT_IMAGE_CARD_HEIGHT,
+  PRODUCT_IMAGE_CARD_WIDTH,
+} from "./editorial-image";
 import { colors, fonts } from "./layout-tokens";
 
 type ProductStoryBlockProps = {
   layout: "image-first" | "text-first";
   product: ProductStoryData;
 };
+
+const PRODUCT_STORY_WIDTH = "42%";
 
 function ProductStory({ product }: Pick<ProductStoryBlockProps, "product">) {
   const [initial = "", ...story] = Array.from(product.discovery_story);
@@ -29,22 +35,22 @@ export function ProductStoryBlock({ layout, product }: ProductStoryBlockProps) {
   return (
     <table data-editorial-component="ProductStoryBlock" data-layout={layout} data-product-id={product.product_id} role="presentation" width="100%" cellPadding="0" cellSpacing="0" style={{ borderTop: `1px solid ${colors.line}`, marginBottom: "48px" }}><tbody><tr>
       <td
-        data-image-column={imageFirst ? "58%" : undefined}
-        data-story-column={imageFirst ? undefined : "42%"}
-        width={imageFirst ? "58%" : "42%"}
+        data-image-column={imageFirst ? PRODUCT_IMAGE_CARD_WIDTH : undefined}
+        data-story-column={imageFirst ? undefined : PRODUCT_STORY_WIDTH}
+        width={imageFirst ? PRODUCT_IMAGE_CARD_WIDTH : PRODUCT_STORY_WIDTH}
         valign="middle"
-        style={{ padding: "32px 40px 32px 0" }}
+        style={imageFirst ? { padding: "0 40px 0 0" } : { padding: "32px 40px 32px 0" }}
       >
-        {imageFirst ? <EditorialImage alt={product.product_name} height={500} src={product.image_url} /> : <ProductStory product={product} />}
+        {imageFirst ? <EditorialImage alt={product.product_name} height={PRODUCT_IMAGE_CARD_HEIGHT} productId={product.product_id} src={product.image_url} /> : <ProductStory product={product} />}
       </td>
       <td
-        data-image-column={imageFirst ? undefined : "58%"}
-        data-story-column={imageFirst ? "42%" : undefined}
-        width={imageFirst ? "42%" : "58%"}
+        data-image-column={imageFirst ? undefined : PRODUCT_IMAGE_CARD_WIDTH}
+        data-story-column={imageFirst ? PRODUCT_STORY_WIDTH : undefined}
+        width={imageFirst ? PRODUCT_STORY_WIDTH : PRODUCT_IMAGE_CARD_WIDTH}
         valign="middle"
-        style={{ padding: "32px 0 32px 40px" }}
+        style={imageFirst ? { padding: "32px 0 32px 40px" } : { padding: "0 0 0 40px" }}
       >
-        {imageFirst ? <ProductStory product={product} /> : <EditorialImage alt={product.product_name} height={500} src={product.image_url} />}
+        {imageFirst ? <ProductStory product={product} /> : <EditorialImage alt={product.product_name} height={PRODUCT_IMAGE_CARD_HEIGHT} productId={product.product_id} src={product.image_url} />}
       </td>
     </tr></tbody></table>
   );

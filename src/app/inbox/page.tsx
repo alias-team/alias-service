@@ -1,6 +1,11 @@
 import { InboxUI } from "@/components/inbox/inbox-ui";
 import mockEmails from "@/data/email/mock-emails.json";
+import { loadDemoPersonalEditorial } from "@/features/editorial/demo-editorial";
 
-export default function InboxPage() {
-  return <InboxUI emails={mockEmails} />;
+export const dynamic = "force-dynamic";
+
+export default async function InboxPage() {
+  const { email } = await loadDemoPersonalEditorial();
+
+  return <InboxUI emails={[email, ...mockEmails]} />;
 }

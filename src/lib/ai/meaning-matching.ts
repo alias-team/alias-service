@@ -19,8 +19,13 @@ import type {
 // customer_product_match/meaning_bridge/extension_result를 생성한다. PASS/REJECT
 // 판단과 GatekeeperInput 조립은 다루지 않는다 — 각각 TASK-205, TASK-204-C의 책임이다.
 
+// TASK-301 원인 격리: 최종 통합 E2E에서 gpt-5-mini가 TASK-204에서 candidates[2].
+// extension_result.new_expression = "" (빈 문자열)을 생성해 schema validation에 실패했다
+// (타임아웃이 아니라 콘텐츠 자체가 스키마를 위반한 경우). 모델 특성인지 확인하기 위한
+// 1회성 비교 테스트 — model만 gpt-5로 바꾼다. 결과에 따라 되돌리거나(gpt-5-mini) 확정할
+// 것(gpt-5). prompt/schema는 건드리지 않는다.
 export const MEANING_MATCHING_MODEL =
-  process.env.OPENAI_MEANING_MATCHING_MODEL ?? "gpt-5-mini";
+  process.env.OPENAI_MEANING_MATCHING_MODEL ?? "gpt-5";
 
 export type MeaningMatchingGenerator = (
   input: MeaningMatchingInput,

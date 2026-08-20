@@ -1,9 +1,10 @@
-import { EditorialEmail } from "@/components/editorial/editorial-email";
-import mockEditorial from "@/data/editorial/mock-editorial.json";
-import { personalEditorialSchema } from "@/lib/validation/editorial.schema";
+import { EditorialCanvasFit } from "@/components/editorial/editorial-canvas-fit";
+import { loadDemoPersonalEditorial } from "@/features/editorial/demo-editorial";
 
-const editorial = personalEditorialSchema.parse(mockEditorial);
+export const dynamic = "force-dynamic";
 
-export default function EditorialPreviewPage() {
-  return <EditorialEmail data={editorial} />;
+export default async function EditorialPreviewPage() {
+  const { editorial } = await loadDemoPersonalEditorial();
+
+  return <EditorialCanvasFit data={editorial} />;
 }

@@ -6,6 +6,9 @@ type BrandStorySectionProps = {
   story: BrandStoryData;
 };
 
+const HERITAGE_IN_MOTION_IMAGE_URL =
+  "https://cdn.media.amplience.net/i/mcmworldwide/TravelLP_IMG3?$poi$&w=2240&fmt=auto&qlt=default&sm=aspect&aspect=4:5";
+
 export function BrandStorySection({ story }: BrandStorySectionProps) {
   const [initial = "", ...content] = Array.from(story.content);
 
@@ -17,7 +20,7 @@ export function BrandStorySection({ story }: BrandStorySectionProps) {
         <div aria-hidden="true" data-editorial-element="BrandStoryTitleRule" style={{ backgroundColor: colors.gold, height: "1px", marginBottom: "33px", maxWidth: "100%", width: "360px" }} />
         <table role="presentation" width="100%" cellPadding="0" cellSpacing="0"><tbody><tr>
           <td valign="middle" width="58%" style={{ paddingRight: "40px" }}>
-            <EditorialImage alt={story.title} height={520} src={story.image_url} />
+            <EditorialImage alt={story.title} height={520} src={HERITAGE_IN_MOTION_IMAGE_URL} />
           </td>
           <td valign="middle" width="42%" style={{ paddingLeft: "40px" }}>
             <p style={{ color: colors.body, fontFamily: fonts.editorial, fontSize: "20px", fontWeight: 400, letterSpacing: "0.005em", lineHeight: 1.9, margin: 0 }}>

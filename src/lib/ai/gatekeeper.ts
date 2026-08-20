@@ -15,8 +15,13 @@ import type {
 } from "@/types/gatekeeper";
 import type { PassProductCandidate } from "@/types/issue-composition";
 
+// TASK-301 원인 격리: 최종 통합 E2E(2026-08-20T16:03~16:07)에서 gpt-5-mini가 실제
+// production input에 대해 TASK-205(Gatekeeper)에서 250,000ms TIMEOUT을 일으켰다 — 이전에
+// TASK-206에서 관찰된 것과 동일한 패턴이 다른 TASK에서도 나타난 것. 모델 특성인지 확인하기
+// 위한 1회성 비교 테스트 — model만 gpt-5로 바꾼다. 결과에 따라 되돌리거나(gpt-5-mini)
+// 확정할 것(gpt-5). prompt/schema는 건드리지 않는다.
 export const GATEKEEPER_MODEL =
-  process.env.OPENAI_GATEKEEPER_MODEL ?? "gpt-5-mini";
+  process.env.OPENAI_GATEKEEPER_MODEL ?? "gpt-5";
 
 export type GatekeeperGenerator = (
   input: GatekeeperInput,

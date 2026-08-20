@@ -9,7 +9,8 @@ import {
   Trash2,
 } from "lucide-react";
 
-import { EditorialEmail } from "@/components/editorial/editorial-email";
+import { EditorialCanvasFit } from "@/components/editorial/editorial-canvas-fit";
+import { colors, fonts } from "@/components/editorial/layout-tokens";
 import type { PersonalEditorial } from "@/types/editorial";
 import type { InboxEmail } from "@/types/inbox";
 import { InboxHeader } from "./inbox-header";
@@ -29,7 +30,7 @@ function senderAddress(email: InboxEmail) {
 }
 
 export function EmailDetailUI({ email, editorial }: EmailDetailUIProps) {
-  const showEditorial = email.id === "email-001" && email.is_editorial;
+  const showEditorial = email.is_editorial;
 
   return (
     <div className="flex min-h-screen min-w-[1024px] flex-col bg-white text-[#202124] [font-family:Arial,Helvetica,sans-serif]">
@@ -62,7 +63,10 @@ export function EmailDetailUI({ email, editorial }: EmailDetailUIProps) {
 
             <div className="px-8 pb-14 pt-6">
               <div className="mb-7 flex items-start gap-4 pl-14">
-                <h1 className="min-w-0 flex-1 text-[22px] leading-8 text-[#1f1f1f]">
+                <h1
+                  className="min-w-0 flex-1"
+                  style={{ color: colors.charcoal, fontFamily: fonts.editorial, fontSize: "26px", fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.2 }}
+                >
                   {email.subject}
                 </h1>
                 {email.is_editorial && (
@@ -102,7 +106,7 @@ export function EmailDetailUI({ email, editorial }: EmailDetailUIProps) {
               <div className="ml-14">
                 {showEditorial ? (
                   <div className="overflow-hidden rounded-lg border border-[#e1e4e8]">
-                    <EditorialEmail data={editorial} />
+                    <EditorialCanvasFit data={editorial} />
                   </div>
                 ) : (
                   <div className="max-w-3xl py-5 text-sm leading-7 text-[#3c4043]">

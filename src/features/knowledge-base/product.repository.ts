@@ -1,8 +1,9 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { getSupabaseServerClient } from "@/lib/database/supabase-server";
-import type { RelatedProductProfile } from "@/types/event";
-import type { Product } from "@/types/product";
+import { ProductProfileAiOutputSchema } from "@/lib/ai/product-profile.schema";
+import type { DataSource, RelatedProductProfile } from "@/types/event";
+import type { NewProductProfile, Product, ProductProfile } from "@/types/product";
 
 // product_profiles를 product_id[] 기준으로 조회하는 함수 형태. event.service.ts와
 // customer-taste.service.ts가 이 형태로 의존성을 주입받는다 — 전체 ProductRepository가
@@ -44,13 +45,66 @@ function toProduct(row: ProductRow): Product {
   };
 }
 
+// TASK-301 DB 연결: TASK-201(Product Understanding) 결과 저장/조회. customer_id 사이의
+// customer.repository.ts.findCurrentTasteProfile/replaceCurrentTasteProfile, event_id
+// 사이의 event.repository.ts.findCurrentMeaningProfile/replaceCurrentMeaningProfile과
+// 동일한 "현재(is_current=true) 1개 조회 + insert 새 row 후 이전 current row들을
+// is_current=false로 내리는" 기존 패턴을 product_id 기준으로 그대로 적용한다. 새 저장
+// 방식(진짜 upsert 등)을 도입하지 않는다 — product_profiles에도 이 둘처럼 unique
+// constraint가 없고 is_current + partial index로만 "현재 1개"를 표현하는 동일한 설계라
+// 기존 패턴을 그대로 재사용할 수 있다.
+interface ProductProfileRow {
+  id: string;
+  product_id: string;
+  // core4/ai_product_traits/evidence는 jsonb라 Supabase가 구조를 보장하지 않는다 —
+  // 억지로 캐스트하지 않고, TASK-201이 쓰는 기존 스키마(ProductProfileAiOutputSchema,
+  // lib/ai/product-profile.schema.ts)로 실제 검증한다(07_DATABASE_SCHEMA.md 10.3과 동일한
+  // customer/event repository 검증 패턴).
+  core4: unknown;
+  ai_product_traits: unknown;
+  evidence: unknown;
+  analysis_model: string | null;
+  source: DataSource;
+  is_current: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
+function toProductProfile(row: ProductProfileRow): ProductProfile {
+  const validated = ProductProfileAiOutputSchema.parse({
+    core4: row.core4,
+    ai_product_traits: row.ai_product_traits,
+    evidence: row.evidence,
+  });
+
+  return {
+    id: row.id,
+    product_id: row.product_id,
+    ...validated,
+    analysis_model: row.analysis_model,
+    source: row.source,
+    is_current: row.is_current,
+    created_at: row.created_at,
+    updated_at: row.updated_at,
+  };
+}
+
 export interface ProductRepository {
   findByProductCode(productCode: string): Promise<Product | null>;
   findByProductCodes(productCodes: string[]): Promise<Product[]>;
+  // TASK-301 DB 연결: Backend Orchestrator용. event.related_product_ids가 이미 products.id(uuid)
+  // 배열이라 product_code 기준 조회로는 원본 Product를 가져올 수 없다 — findByProductCodes와
+  // 동일한 조회/에러 처리 패턴을 id 기준으로만 다시 쓴다.
+  findByIds(productIds: string[]): Promise<Product[]>;
   // event.repository.ts에서 이동(TASK-301 5단계 후속 리팩토링) — product_profiles는
   // event 도메인이 아니라 product 도메인 데이터라 여기로 옮겼다. 조회 결과/에러 처리
   // 의미는 이전 event.repository.ts.findRelatedProductProfiles()와 동일하게 유지한다.
   findByProductIds: ProductProfileLookup;
+  // TASK-301 DB 연결: TASK-201 결과 저장 경로. analyzeProduct()(TASK-201, lib/ai/product-understanding.ts)의
+  // 로직/prompt/schema는 전혀 건드리지 않고, 이미 검증까지 끝난 결과를 저장/조회하는
+  // 얇은 연결 계층만 추가한다.
+  findCurrentProfile(productId: string): Promise<ProductProfile | null>;
+  replaceCurrentProfile(profile: NewProductProfile): Promise<ProductProfile>;
 }
 
 export function createProductRepository(
@@ -81,6 +135,18 @@ export function createProductRepository(
       return ((data ?? []) as ProductRow[]).map(toProduct);
     },
 
+    async findByIds(productIds) {
+      if (productIds.length === 0) return [];
+
+      const { data, error } = await supabase
+        .from("products")
+        .select("id,product_code,name,official_description,image_url,metadata")
+        .in("id", productIds);
+
+      if (error) throw new Error(`Failed to load products: ${error.message}`);
+      return ((data ?? []) as ProductRow[]).map(toProduct);
+    },
+
     async findByProductIds(productIds) {
       if (productIds.length === 0) return [];
 
@@ -94,6 +160,50 @@ export function createProductRepository(
         throw new Error(`Failed to load related product profiles: ${error.message}`);
       }
       return (data ?? []) as RelatedProductProfile[];
+    },
+
+    async findCurrentProfile(productId) {
+      const { data, error } = await supabase
+        .from("product_profiles")
+        .select(
+          "id,product_id,core4,ai_product_traits,evidence,analysis_model,source,is_current,created_at,updated_at",
+        )
+        .eq("product_id", productId)
+        .eq("is_current", true)
+        .maybeSingle();
+
+      if (error) {
+        throw new Error(`Failed to load current Product Profile: ${error.message}`);
+      }
+      if (!data) return null;
+      return toProductProfile(data as ProductProfileRow);
+    },
+
+    async replaceCurrentProfile(profile) {
+      const { data, error } = await supabase
+        .from("product_profiles")
+        .insert(profile)
+        .select()
+        .single();
+
+      if (error) {
+        throw new Error(`Failed to save Product Profile: ${error.message}`);
+      }
+
+      const saved = toProductProfile(data as ProductProfileRow);
+      const { error: updateError } = await supabase
+        .from("product_profiles")
+        .update({ is_current: false })
+        .eq("product_id", profile.product_id)
+        .eq("is_current", true)
+        .neq("id", saved.id);
+
+      if (updateError) {
+        throw new Error(
+          `Saved the new profile but failed to clear older current profiles: ${updateError.message}`,
+        );
+      }
+      return saved;
     },
   };
 }

@@ -1,3 +1,5 @@
+import type { DataSource } from "./event";
+
 // TASK-301 DB 연결 1단계: products 테이블 읽기 전용 타입
 // Source: documents/[개발 문서] 07_DATABASE_SCHEMA.md (4.1 products)
 //
@@ -15,4 +17,33 @@ export interface Product {
   official_description: string;
   image_url: string;
   metadata: Record<string, unknown>;
+}
+
+// TASK-301 DB 연결: product_profiles 저장/조회 타입. customer.repository.ts의
+// CustomerTasteProfile/NewCustomerTasteProfile, event.repository.ts의
+// EventMeaningProfile/NewEventMeaningProfile과 동일한 짝(현재 조회용 전체 row 타입 +
+// 저장용 입력 타입) 패턴을 그대로 따른다. core4/ai_product_traits/evidence는
+// RelatedProductProfile(types/event.ts)과 동일하게 unknown으로 둔다 — 실제 구조 검증은
+// TASK-201의 기존 ProductProfileAiOutputSchema(lib/ai/product-profile.schema.ts)가 담당한다.
+export interface ProductProfile {
+  id: string;
+  product_id: string;
+  core4: unknown;
+  ai_product_traits: unknown[];
+  evidence: unknown[];
+  analysis_model: string | null;
+  source: DataSource;
+  is_current: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface NewProductProfile {
+  product_id: string;
+  core4: unknown;
+  ai_product_traits: unknown[];
+  evidence: unknown[];
+  analysis_model: string | null;
+  source: "ai_generated";
+  is_current: true;
 }

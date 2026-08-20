@@ -10,8 +10,11 @@ import type {
   IssueCompositionInput,
 } from "@/types/issue-composition";
 
+// TASK-301 원인 격리: gpt-5-mini가 실제 production input에서 반복 250~300초 TIMEOUT을
+// 일으키는 것이 모델 특성인지 확인하기 위한 1회성 비교 테스트 — model만 gpt-5로 바꾼다.
+// 결과에 따라 되돌리거나(gpt-5-mini) 확정할 것(gpt-5). prompt/schema는 건드리지 않는다.
 export const ISSUE_COMPOSITION_MODEL =
-  process.env.OPENAI_ISSUE_COMPOSITION_MODEL ?? "gpt-5-mini";
+  process.env.OPENAI_ISSUE_COMPOSITION_MODEL ?? "gpt-5";
 
 export type IssueCompositionGenerator = (
   input: IssueCompositionInput,
@@ -23,6 +26,15 @@ const generateWithOpenAI: IssueCompositionGenerator = async (input) => {
     model: ISSUE_COMPOSITION_MODEL,
     instructions: prompt.instructions,
     input: prompt.input,
+    // TASK-301 E2E 감사 결과: 206 output에 상한이 없어 생성이 비정상적으로 길어질 여지가
+    // 있었다(코드/prompt/schema는 그대로, 생성량만 제한). 상한에 걸려 잘리면 output_text가
+    // 불완전한 JSON이 되어 아래 JSON.parse가 그대로 실패하고, 기존 에러 처리 경로(호출부
+    // catch -> orchestrator markFailed)를 그대로 탄다 — 새 fallback/재생성 로직은 추가하지 않는다.
+    max_output_tokens: 8000,
+    // TASK-301 gpt-5 비교 테스트: reasoning:{effort:"low"}는 gpt-5-mini 반복 타임아웃에
+    // 효과가 없었던 것으로 이미 확인됐다(runtime 로그). "모델만" 비교하기 위해 이번
+    // 테스트에서는 reasoning 옵션을 빼고 gpt-5 기본 reasoning 설정으로 호출한다. gpt-5-mini로
+    // 되돌릴 경우 reasoning:{effort:"low"}도 함께 복원해야 한다.
     text: {
       format: {
         type: "json_schema",

@@ -10,7 +10,7 @@ export function EditorialFooter({ closing }: EditorialFooterProps) {
     <footer data-editorial-component="EditorialFooter">
       <table role="presentation" width="100%" cellPadding="0" cellSpacing="0"><tbody><tr>
         <td style={{ padding: "80px 80px 68px", textAlign: "center" }}>
-          <p style={{ color: colors.ink, fontFamily: fonts.display, fontSize: "38px", fontStyle: "italic", fontWeight: 400, letterSpacing: "-0.015em", lineHeight: 1.22, margin: "0 auto 36px", maxWidth: "100%", opacity: 0.48, whiteSpace: "nowrap" }}>{closing.content}</p>
+          <p style={{ color: colors.ink, fontFamily: fonts.display, fontSize: "38px", fontStyle: "italic", fontWeight: 400, letterSpacing: "-0.015em", lineHeight: 1.22, margin: "0 auto 36px", maxWidth: "100%", opacity: 0.48, whiteSpace: "normal" }}>{closing.content}</p>
           {/* Native image markup is intentional because this component targets email HTML. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
