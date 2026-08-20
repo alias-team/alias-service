@@ -79,6 +79,8 @@ function passProduct(productId: string, name: string): PassProductCandidate {
     matching_reason: "The product extends an established preference.",
     meaning_bridge: "Familiar craft expressed through movement.",
     extension: "A mobile expression of heritage.",
+    existing_preference: "Established heritage craft preference.",
+    new_expression: "A mobile expression of that same heritage craft.",
     evidence: [`${productId} supports mobile use.`],
   };
 }
@@ -120,6 +122,11 @@ function issueComposition(productIds: string[]): IssueComposition {
       event_theme: "Mobility",
       brand_direction: "Modern movement",
       connection_narrative: "The Event carries familiar craft into motion.",
+    },
+    personal_connection: {
+      existing_preference: "The customer has favored established heritage craft.",
+      new_expression: "The Event expresses that craft through contemporary movement.",
+      connection_reason: "It extends the customer's own preference rather than repeating it.",
     },
     evidence: ["The supplied products support mobile use."],
   };

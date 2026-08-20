@@ -147,6 +147,11 @@ function hydratePassCandidate(
     matching_reason: candidate.customer_product_match.matching_reason,
     meaning_bridge: candidate.meaning_bridge,
     extension: candidate.extension_result.extension_reason,
+    // TASK-206 personal_connection이 근거로 쓸 수 있도록 TASK-204 extension_result의
+    // existing_preference/new_expression을 변형 없이 그대로 보존한다 — 새 판단 아님,
+    // PASS/REJECT 로직도 그대로다.
+    existing_preference: candidate.extension_result.existing_preference,
+    new_expression: candidate.extension_result.new_expression,
     evidence: collectEvidence(input, candidate),
   });
 }

@@ -91,16 +91,6 @@ function assertCompositionIdentity(
     );
   }
 
-  if (
-    composition.brand_connection.event_theme !==
-      input.eventMeaningProfile.event_theme ||
-    composition.brand_connection.brand_direction !==
-      input.eventMeaningProfile.brand_direction
-  ) {
-    throw new Error(
-      "Issue Composition brand connection must preserve the Event Meaning",
-    );
-  }
 }
 
 export async function composeIssue(
@@ -115,5 +105,16 @@ export async function composeIssue(
   const composition = issueCompositionSchema.parse(response);
   assertCompositionIdentity(validatedInput, composition);
 
-  return composition;
+  // brand_connection.event_theme/brand_direction은 모델이 재생성한 문자열을 신뢰하지
+  // 않는다 — composeIssue()가 이미 아는 input.eventMeaningProfile 값을 결정론적으로
+  // 그대로 쓴다(새 판단 아님, 문자열 재생성 오차로 인한 identity 실패를 원천 차단).
+  // connection_narrative만 모델이 생성한 값을 그대로 쓴다.
+  return {
+    ...composition,
+    brand_connection: {
+      ...composition.brand_connection,
+      event_theme: validatedInput.eventMeaningProfile.event_theme,
+      brand_direction: validatedInput.eventMeaningProfile.brand_direction,
+    },
+  };
 }

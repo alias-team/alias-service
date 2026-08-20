@@ -27,6 +27,8 @@ export const passProductCandidateSchema = z
     matching_reason: nonEmptyString,
     meaning_bridge: nonEmptyString,
     extension: nonEmptyString,
+    existing_preference: nonEmptyString,
+    new_expression: nonEmptyString,
     evidence: z.array(nonEmptyString).min(1),
   })
   .strict();
@@ -67,6 +69,18 @@ export const brandConnectionSchema = z
   })
   .strict();
 
+// passProductPool[].matching_reason/meaning_bridge/extension을 근거로 구성하는
+// 고객 개인화 연결 — existing_preference/new_expression/extension_reason과 동일한
+// existing->new->why-meaningful 구조를 issue_composition.ts의 ExtensionResult에서
+// 그대로 가져왔다(새 개념 아님).
+export const personalConnectionSchema = z
+  .object({
+    existing_preference: nonEmptyString,
+    new_expression: nonEmptyString,
+    connection_reason: nonEmptyString,
+  })
+  .strict();
+
 export const issueCompositionSchema = z
   .object({
     event_id: nonEmptyString,
@@ -74,6 +88,7 @@ export const issueCompositionSchema = z
     editorial_angle: nonEmptyString,
     selected_products: z.array(selectedProductCompositionSchema).min(1),
     brand_connection: brandConnectionSchema,
+    personal_connection: personalConnectionSchema,
     evidence: z.array(nonEmptyString).min(1),
   })
   .strict();
@@ -87,6 +102,7 @@ export const issueCompositionJsonSchema = {
     "editorial_angle",
     "selected_products",
     "brand_connection",
+    "personal_connection",
     "evidence",
   ],
   properties: {
@@ -119,6 +135,16 @@ export const issueCompositionJsonSchema = {
         event_theme: { type: "string", minLength: 1 },
         brand_direction: { type: "string", minLength: 1 },
         connection_narrative: { type: "string", minLength: 1 },
+      },
+    },
+    personal_connection: {
+      type: "object",
+      additionalProperties: false,
+      required: ["existing_preference", "new_expression", "connection_reason"],
+      properties: {
+        existing_preference: { type: "string", minLength: 1 },
+        new_expression: { type: "string", minLength: 1 },
+        connection_reason: { type: "string", minLength: 1 },
       },
     },
     evidence: {

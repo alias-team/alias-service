@@ -61,6 +61,11 @@ function input(productIds = ["PRODUCT_001", "PRODUCT_002"]): EditorialGeneratorI
         brand_direction: "Heritage reinterpreted for contemporary movement",
         connection_narrative: "Familiar craft moves into a new urban context.",
       },
+      personal_connection: {
+        existing_preference: "The customer has favored established heritage craft.",
+        new_expression: "The Event expresses that craft through contemporary movement.",
+        connection_reason: "It extends the customer's own preference rather than repeating it.",
+      },
       evidence: ["The Event and selected Products passed composition validation."],
     },
     event_meaning_profile: eventMeaningProfile,
@@ -176,6 +181,72 @@ describe("generateEditorial", () => {
     expect(promptInput).not.toHaveProperty("gatekeeper_results");
     expect(prompt.instructions).toContain("English");
     expect(prompt.instructions).toContain("not recommendations");
+  });
+
+  // TASK-207 개인화 보완: issue_composition.personal_connection이 prompt input에
+  // 포함되고(기존 JSON.stringify(input)로 이미 전달됨), 지시문이 이를 편집 근거로
+  // 명시적으로 요구하는지 확인한다. 새 판단/새 evidence 생성을 지시하지 않는지도 함께 확인.
+  it("includes issue_composition.personal_connection in the prompt input", () => {
+    const prompt = buildEditorialGeneratorPrompt(input());
+    const promptInput = JSON.parse(prompt.input);
+
+    expect(promptInput.issue_composition.personal_connection).toEqual(
+      input().issue_composition.personal_connection,
+    );
+  });
+
+  it("explicitly requires personal_connection as the narrative basis, without inventing new facts", () => {
+    const prompt = buildEditorialGeneratorPrompt(input());
+
+    expect(prompt.instructions).toContain("personal_connection");
+    expect(prompt.instructions).toContain("existing_preference");
+    expect(prompt.instructions).toContain("new_expression");
+    expect(prompt.instructions).toContain("connection_reason");
+    expect(prompt.instructions).toContain("never invent facts");
+    expect(prompt.instructions).toContain("new connection reason");
+  });
+
+  // 제품별 connection_reason이 브랜드 캠페인 톤("modern nomad"류)에 치우치지 않고
+  // 고객 개인화 중심을 유지하도록 요구하는지 확인. brand_story에는 브랜드/Event 언어가
+  // 허용됨을 함께 확인해 기존 personal_connection 규칙과 충돌하지 않는지 본다.
+  it("requires per-Product connection_reason to stay centered on the customer, not generic campaign/brand phrasing", () => {
+    const prompt = buildEditorialGeneratorPrompt(input());
+
+    expect(prompt.instructions).toContain(
+      "connection_reason for each Product must center on why this Product meaningfully extends this customer's own established taste",
+    );
+    expect(prompt.instructions).toContain("Generic campaign phrasing");
+    expect(prompt.instructions).toContain("brand_story and the general background may carry it");
+  });
+
+  // connection_reason의 순서(취향 해석 먼저, 기능/스펙은 뒷받침 근거로만)를 요구하는지,
+  // discovery_story도 기능 소개가 아니라 취향 해석 중심이어야 함을 명시하는지 확인.
+  it("requires taste interpretation to lead connection_reason/discovery_story, with functional details only as brief supporting evidence", () => {
+    const prompt = buildEditorialGeneratorPrompt(input());
+
+    expect(prompt.instructions).toContain(
+      "Lead each Product's connection_reason with the taste interpretation (what this reveals, preserves, or meaningfully extends about the customer), and let functional or specification details such as pockets, materials, compartments, or convertibility serve only as brief supporting evidence, never as the sentence's main subject.",
+    );
+    expect(prompt.instructions).toContain(
+      "never lead with what the Product does and only afterward tie it to the customer",
+    );
+    expect(prompt.instructions).toContain(
+      "write it as what this Product reveals about the customer's established taste in a new form, not as a tour of the Product's features",
+    );
+  });
+
+  // email_header.subject 전용 지시: 짧은 personalized hook, 캠페인 문구/제품명·기능 나열 금지,
+  // curiosity 유발. preview 관련 규칙은 이번 변경 대상이 아니므로 별도로 건드리지 않았는지도 확인.
+  it("requires a short, personalized, curiosity-driving subject that avoids campaign titles and Product names/features", () => {
+    const prompt = buildEditorialGeneratorPrompt(input());
+
+    expect(prompt.instructions).toContain(
+      "Write email_header.subject as a short, personalized hook, not a descriptive sentence",
+    );
+    expect(prompt.instructions).toContain("create a small pull of curiosity");
+    expect(prompt.instructions).toContain("avoid phrasing like 'New Collection' or 'Discover Now'");
+    expect(prompt.instructions).toContain("without naming a Product or listing a Product feature");
+    expect(prompt.instructions).toContain("For calibration only, not as fixed wording to reuse verbatim");
   });
 
   it("keeps the entire Product Pool when more than three Products are selected", async () => {
