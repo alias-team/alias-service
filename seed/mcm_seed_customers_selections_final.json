@@ -1,0 +1,88 @@
+{
+  "customers": [
+    {
+      "customer_code": "DEMO-CUSTOMER-A",
+      "display_name": "MCM 고객 A",
+      "description": "MCM 고객 A는 다양한 업무 및 일상 상황에서 MCM 제품을 사용하는 데모 고객이다. 현재 2개의 구매 이력과 3개의 위시리스트를 보유하고 있으며, 이 선택 데이터를 기반으로 AI가 반복적으로 나타나는 취향과 선호 패턴을 분석한다.",
+      "source": "seed"
+    },
+    {
+      "customer_code": "DEMO-CUSTOMER-B",
+      "display_name": "MCM 고객 B",
+      "description": "MCM 고객 B는 다양한 패션 카테고리에서 MCM 제품을 탐색하는 데모 고객이다. 현재 2개의 구매 이력과 3개의 위시리스트를 보유하고 있으며, 고객 A와는 다른 선택 데이터를 기반으로 AI가 개별적인 취향과 선호 패턴을 분석한다.",
+      "source": "seed"
+    }
+  ],
+  "customer_product_selections": [
+    {
+      "customer_code": "DEMO-CUSTOMER-A",
+      "product_code": "MWHGSTA03BK001",
+      "selection_type": "purchase",
+      "selected_at": null,
+      "source": "seed"
+    },
+    {
+      "customer_code": "DEMO-CUSTOMER-A",
+      "product_code": "MMTFAKK01BK001",
+      "selection_type": "purchase",
+      "selected_at": null,
+      "source": "seed"
+    },
+    {
+      "customer_code": "DEMO-CUSTOMER-A",
+      "product_code": "MWSGSTA05BW001",
+      "selection_type": "wishlist",
+      "selected_at": null,
+      "source": "seed"
+    },
+    {
+      "customer_code": "DEMO-CUSTOMER-A",
+      "product_code": "MMKDSTA01BK001",
+      "selection_type": "wishlist",
+      "selected_at": null,
+      "source": "seed"
+    },
+    {
+      "customer_code": "DEMO-CUSTOMER-A",
+      "product_code": "MMPGSDC02BK001",
+      "selection_type": "wishlist",
+      "selected_at": null,
+      "source": "seed"
+    },
+    {
+      "customer_code": "DEMO-CUSTOMER-B",
+      "product_code": "MWHGSTA03BK001",
+      "selection_type": "purchase",
+      "selected_at": null,
+      "source": "seed"
+    },
+    {
+      "customer_code": "DEMO-CUSTOMER-B",
+      "product_code": "MWREAAK04SV001",
+      "selection_type": "purchase",
+      "selected_at": null,
+      "source": "seed"
+    },
+    {
+      "customer_code": "DEMO-CUSTOMER-B",
+      "product_code": "MESEAAH01BK036",
+      "selection_type": "wishlist",
+      "selected_at": null,
+      "source": "seed"
+    },
+    {
+      "customer_code": "DEMO-CUSTOMER-B",
+      "product_code": "MWSGSTA05BW001",
+      "selection_type": "wishlist",
+      "selected_at": null,
+      "source": "seed"
+    },
+    {
+      "customer_code": "DEMO-CUSTOMER-B",
+      "product_code": "MXBFSCJ04BK080",
+      "selection_type": "wishlist",
+      "selected_at": null,
+      "source": "seed"
+    }
+  ]
+}
