@@ -10,6 +10,10 @@ export interface Event {
   brand_message: string;
   collection_concept: string | null;
   related_product_ids: string[];
+  // TASK-301 DB 연결: Event 단위 대표 이미지 / MCM 공식 페이지 링크. 아직 실제 값이 없는
+  // Event가 많아 nullable이다 — "값 없음"을 null로, placeholder 문자열로 대체하지 않는다.
+  hero_image_url: string | null;
+  official_url: string | null;
   source: DataSource;
 }
 

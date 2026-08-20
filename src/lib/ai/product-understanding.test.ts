@@ -1,6 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { TraitQualityValidationError, validateTraitQuality } from "./product-understanding";
+const { createMock } = vi.hoisted(() => ({ createMock: vi.fn() }));
+
+vi.mock("./openai-client", () => ({
+  getOpenAIClient: () => ({
+    chat: { completions: { create: createMock } },
+  }),
+}));
+
+import { analyzeProduct, TraitQualityValidationError, validateTraitQuality } from "./product-understanding";
 import type { ProductProfileAiOutput } from "./product-profile.schema";
 
 // TASK-201: AI Product Trait 의미 품질 검증(validateTraitQuality).
@@ -55,6 +63,65 @@ beforeEach(() => {
 
 afterEach(() => {
   warnSpy.mockRestore();
+});
+
+// TASK-201: gpt-5-mini는 temperature=0(요청 기본값)을 지원하지 않고 400을 반환한다
+// (Unsupported value: 'temperature' does not support 0 with this model). callVisionJson()이
+// model === "gpt-5-mini"일 때만 temperature 필드를 요청에서 제외하는지 확인한다.
+// 다른 로직(Core4/schema 검증 등)은 대상이 아니므로 create()가 이후 무엇을 반환하든 신경 쓰지
+// 않고, 실제로 전송된 요청 payload만 검사한다.
+describe("callVisionJson (via analyzeProduct) temperature 처리", () => {
+  const originalModel = process.env.OPENAI_MODEL;
+
+  afterEach(() => {
+    createMock.mockReset();
+    if (originalModel === undefined) delete process.env.OPENAI_MODEL;
+    else process.env.OPENAI_MODEL = originalModel;
+  });
+
+  it("OPENAI_MODEL=gpt-5-mini면 temperature 필드를 요청에서 완전히 제외한다", async () => {
+    process.env.OPENAI_MODEL = "gpt-5-mini";
+    createMock.mockRejectedValueOnce(new Error("stub: downstream 검증 대상 아님"));
+
+    await analyzeProduct({
+      imageUrl: "https://example.com/product.jpg",
+      officialDescription: "설명",
+    }).catch(() => {});
+
+    expect(createMock).toHaveBeenCalledTimes(1);
+    const requestArg = createMock.mock.calls[0]?.[0] as Record<string, unknown>;
+    expect(requestArg.model).toBe("gpt-5-mini");
+    expect(requestArg).not.toHaveProperty("temperature");
+  });
+
+  it("gpt-4o-mini(기본값)는 기존대로 temperature=0을 그대로 전달한다", async () => {
+    delete process.env.OPENAI_MODEL;
+    createMock.mockRejectedValueOnce(new Error("stub: downstream 검증 대상 아님"));
+
+    await analyzeProduct({
+      imageUrl: "https://example.com/product.jpg",
+      officialDescription: "설명",
+    }).catch(() => {});
+
+    expect(createMock).toHaveBeenCalledTimes(1);
+    const requestArg = createMock.mock.calls[0]?.[0] as Record<string, unknown>;
+    expect(requestArg.model).toBe("gpt-4o-mini");
+    expect(requestArg.temperature).toBe(0);
+  });
+
+  it("gpt-4o처럼 명시적으로 override해도 gpt-5-mini가 아니면 temperature=0을 전달한다", async () => {
+    process.env.OPENAI_MODEL = "gpt-4o";
+    createMock.mockRejectedValueOnce(new Error("stub: downstream 검증 대상 아님"));
+
+    await analyzeProduct({
+      imageUrl: "https://example.com/product.jpg",
+      officialDescription: "설명",
+    }).catch(() => {});
+
+    const requestArg = createMock.mock.calls[0]?.[0] as Record<string, unknown>;
+    expect(requestArg.model).toBe("gpt-4o");
+    expect(requestArg.temperature).toBe(0);
+  });
 });
 
 describe("validateTraitQuality", () => {

@@ -1,5 +1,15 @@
 import type { DataSource } from "./event";
 
+// TASK-301 DB 연결 2단계: customers 테이블 읽기 전용 타입.
+// Source: documents/[개발 문서] 07_DATABASE_SCHEMA.md (4.3 customers)
+export interface Customer {
+  id: string;
+  customer_code: string;
+  display_name: string;
+  description: string | null;
+  source: DataSource;
+}
+
 export type SelectionType = "purchase" | "wishlist";
 
 export interface CustomerProductSelection {

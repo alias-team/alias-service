@@ -10,8 +10,10 @@ import type {
   CustomerAiTrait,
   CustomerTasteAnalysis,
   CustomerTasteInput,
+  CustomerTasteProfile,
   SelectedProductProfile,
 } from "@/types/customer";
+import type { CustomerProfileContext } from "@/types/gatekeeper";
 
 // TASK-202: Customer Taste Discovery Engine
 // Source: docs/[개발 문서] 09_PRODUCT_BACKLOG.md "TASK-202", docs/[개발 문서] 07_DATABASE_SCHEMA.md 4.5
@@ -72,6 +74,21 @@ export function toCorePreferenceRecord(
     silhouetteForm: corePreference.silhouetteForm,
     material: corePreference.material,
     monogramDensity: corePreference.monogramDensity,
+  };
+}
+
+// TASK-301 DB 연결 4단계: TASK-204 입력 투영. DB에서 읽은 CustomerTasteProfile(id/
+// customer_id/source/is_current 등 DB row 메타데이터 포함)에서 TASK-204/205가 쓰는
+// CustomerProfileContext 4개 필드만 추린다 — 순수 필드 선택이며 값을 만들거나 해석하지
+// 않는다. core_preference는 toCorePreferenceRecord()를 그대로 재사용한다.
+export function toCustomerProfileContext(
+  profile: CustomerTasteProfile,
+): CustomerProfileContext {
+  return {
+    taste_summary: profile.taste_summary,
+    core_preference: toCorePreferenceRecord(profile.core_preference),
+    ai_traits: profile.ai_traits,
+    evidence_product_ids: profile.evidence_product_ids,
   };
 }
 

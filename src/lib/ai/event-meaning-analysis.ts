@@ -4,7 +4,12 @@ import {
   eventMeaningAnalysisSchema,
   eventMeaningJsonSchema,
 } from "@/lib/validation/event-meaning.schema";
-import type { EventMeaningAnalysis, EventMeaningInput } from "@/types/event";
+import type {
+  EventMeaningAnalysis,
+  EventMeaningInput,
+  EventMeaningProfile,
+} from "@/types/event";
+import type { EventMeaningContext } from "@/types/gatekeeper";
 
 export const EVENT_MEANING_MODEL =
   process.env.OPENAI_EVENT_MEANING_MODEL ?? "gpt-5-mini";
@@ -51,4 +56,19 @@ export async function analyzeEventMeaning(
     relatedProductProfiles: input.relatedProductProfiles ?? [],
   });
   return eventMeaningAnalysisSchema.parse(response);
+}
+
+// TASK-301 DB 연결 4단계: TASK-204 입력 투영. DB에서 읽은 EventMeaningProfile(id/
+// analysis_model/source/is_current 등 DB row 메타데이터 포함)에서 TASK-204/205가 쓰는
+// EventMeaningContext 5개 필드만 추린다 — 순수 필드 선택이며 값을 만들거나 해석하지 않는다.
+export function toEventMeaningContext(
+  profile: EventMeaningProfile,
+): EventMeaningContext {
+  return {
+    event_id: profile.event_id,
+    event_theme: profile.event_theme,
+    brand_direction: profile.brand_direction,
+    event_traits: profile.event_traits,
+    evidence: profile.evidence,
+  };
 }

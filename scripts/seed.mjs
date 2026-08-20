@@ -187,6 +187,10 @@ function buildEventRows() {
     collection_concept: e.collection_concept ?? null,
     related_product_ids: [], // placeholder, mapProductIds() 로 치환
     _related_product_codes: e.related_product_ids ?? [],
+    // TASK-301 DB 연결: 아직 seed에 실제 값이 없다 — 있으면 그대로, 없으면 null(빈 문자열
+    // 등 placeholder를 만들지 않는다).
+    hero_image_url: e.hero_image_url ?? null,
+    official_url: e.official_url ?? null,
     source: e.source ?? "seed",
   }));
 }

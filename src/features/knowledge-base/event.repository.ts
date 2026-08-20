@@ -1,18 +1,54 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { getSupabaseServerClient } from "@/lib/database/supabase-server";
+import { eventMeaningAnalysisSchema } from "@/lib/validation/event-meaning.schema";
 import type {
+  DataSource,
   Event,
   EventMeaningProfile,
   NewEventMeaningProfile,
-  RelatedProductProfile,
 } from "@/types/event";
+
+// TASK-301 DB 연결 3단계: event_meaning_profiles의 현재(is_current=true) 프로필 조회.
+// event_traits/evidence는 jsonb라 Supabase가 구조를 보장하지 않는다 — 억지로 캐스트하지
+// 않고, 기존 eventMeaningAnalysisSchema(Zod)로 실제 검증한다(07_DATABASE_SCHEMA.md 10.3).
+interface EventMeaningProfileRow {
+  id: string;
+  event_id: string;
+  event_theme: string;
+  brand_direction: string;
+  event_traits: unknown;
+  evidence: unknown;
+  analysis_model: string | null;
+  source: DataSource;
+  is_current: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
+function toEventMeaningProfile(row: EventMeaningProfileRow): EventMeaningProfile {
+  const validated = eventMeaningAnalysisSchema.parse({
+    event_theme: row.event_theme,
+    brand_direction: row.brand_direction,
+    event_traits: row.event_traits,
+    evidence: row.evidence,
+  });
+
+  return {
+    id: row.id,
+    event_id: row.event_id,
+    ...validated,
+    analysis_model: row.analysis_model,
+    source: row.source,
+    is_current: row.is_current,
+    created_at: row.created_at,
+    updated_at: row.updated_at,
+  };
+}
 
 export interface EventRepository {
   findEventById(eventId: string): Promise<Event | null>;
-  findRelatedProductProfiles(
-    productIds: string[],
-  ): Promise<RelatedProductProfile[]>;
+  findCurrentMeaningProfile(eventId: string): Promise<EventMeaningProfile | null>;
   replaceCurrentMeaningProfile(
     profile: NewEventMeaningProfile,
   ): Promise<EventMeaningProfile>;
@@ -26,7 +62,7 @@ export function createEventRepository(
       const { data, error } = await supabase
         .from("events")
         .select(
-          "id,event_code,name,event_type,campaign_overview,brand_message,collection_concept,related_product_ids,source",
+          "id,event_code,name,event_type,campaign_overview,brand_message,collection_concept,related_product_ids,hero_image_url,official_url,source",
         )
         .eq("id", eventId)
         .maybeSingle();
@@ -35,19 +71,21 @@ export function createEventRepository(
       return data as Event | null;
     },
 
-    async findRelatedProductProfiles(productIds) {
-      if (productIds.length === 0) return [];
-
+    async findCurrentMeaningProfile(eventId) {
       const { data, error } = await supabase
-        .from("product_profiles")
-        .select("id,product_id,core4,ai_product_traits,evidence")
-        .in("product_id", productIds)
-        .eq("is_current", true);
+        .from("event_meaning_profiles")
+        .select(
+          "id,event_id,event_theme,brand_direction,event_traits,evidence,analysis_model,source,is_current,created_at,updated_at",
+        )
+        .eq("event_id", eventId)
+        .eq("is_current", true)
+        .maybeSingle();
 
       if (error) {
-        throw new Error(`Failed to load related product profiles: ${error.message}`);
+        throw new Error(`Failed to load current Event Meaning Profile: ${error.message}`);
       }
-      return (data ?? []) as RelatedProductProfile[];
+      if (!data) return null;
+      return toEventMeaningProfile(data as EventMeaningProfileRow);
     },
 
     async replaceCurrentMeaningProfile(profile) {

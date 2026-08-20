@@ -8,6 +8,8 @@
       "brand_message": "대표 related products의 공식 제품 설명에 반복적으로 나타나는 표현 기준: Ottomar Passport Holder는 \"the modern global nomad\"를 위해 만들어졌고 \"the jet-setting ethos of the Munich House\"를 담는다고 설명되며, Stark Packable Backpack은 \"hands-free wear\"를 위한 \"functional innovation\"을 강조한다.",
       "collection_concept": "3개 대표 제품의 공식 설명 기준: Ottomar Cabin Trolley는 랩탑 포켓과 구획화된 인테리어를 갖춘 여행용 트롤리, Stark Packable Backpack은 사용하지 않을 때 파우치로 접어 휴대할 수 있는 컨버터블 백팩, Ottomar Passport Holder는 여행 크레덴셜을 수납하는 바이폴드 액세서리다. 공통적으로 이동 중 사용 편의성(hands-free, packable, 구획화된 수납)이 반복되는 테마다.",
       "related_product_ids": ["MMVGSTT04CO001", "MMKGSVE09BK001", "MXVFATT01BK001"],
+      "hero_image_url": "https://cdn.media.amplience.net/i/mcmworldwide/TravelLP_Carousel1_IMG4?$poi$=&fmt=auto&qlt=default&w=320",
+      "official_url": "https://us.mcmworldwide.com/en_US/mcm-travel-edit",
       "source": "seed"
     },
     {
@@ -18,6 +20,8 @@
       "brand_message": "DJ Khaled 특유의 문구 \"As long as you show up and put in the work, you the best\"를 브랜드 메시지 축으로 삼고, 'We The Best'/'Another One' 카피가 RTW 제품에 실제로 프린트됨. 라이프스타일 태도와 헌신을 강조.",
       "collection_concept": "Event 전체 컬렉션은 cognac Visetos·ultrasuede·밝은 블루 가죽 악센트를 결합해 \"Miami energy\"와 \"Miami Art Deco flair\"를 표현한다고 공식 소개되어 있다(이 조합이 적용된 백팩·위켄더백 등 다른 컬렉션 아이템 기준 설명이며, 아래 3개 대표 related products와는 별개 사실이다). 이번 Seed의 대표 related products 3개(Polo/Ultrasuede Cap/Ultrasuede Slides)는 공식 설명 기준 Merino wool·cashmere·일본산 ultrasuede 소재에 \"MCM x We The Best\" 로고를 모노크롬 톤으로 새긴 것이 공통 특징이다.",
       "related_product_ids": ["MHTGAMM05BK00S", "MEHGAMM04NG001", "MEXGAMM06NG042"],
+      "hero_image_url": null,
+      "official_url": null,
       "source": "seed"
     }
   ]

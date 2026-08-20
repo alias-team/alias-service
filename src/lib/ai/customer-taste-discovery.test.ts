@@ -4,10 +4,13 @@ import {
   computeCorePreference,
   discoverCustomerTaste,
   toCorePreferenceRecord,
+  toCustomerProfileContext,
 } from "./customer-taste-discovery";
+import { gatekeeperInputSchema } from "@/lib/validation/gatekeeper.schema";
 import type {
   CorePreference,
   CustomerTasteInput,
+  CustomerTasteProfile,
   SelectedProductProfile,
 } from "@/types/customer";
 
@@ -98,6 +101,67 @@ describe("toCorePreferenceRecord", () => {
       material: ["leather", "signature_monogram"],
       monogramDensity: [],
     });
+  });
+});
+
+describe("toCustomerProfileContext", () => {
+  const profile: CustomerTasteProfile = {
+    id: "taste-profile-1",
+    customer_id: "customer-1",
+    taste_summary: "구조적인 헤리티지 제품을 반복 선택합니다.",
+    core_preference: {
+      colorTone: ["mono"],
+      silhouetteForm: ["structured"],
+      material: ["leather"],
+      monogramDensity: ["medium"],
+    },
+    ai_traits: [
+      {
+        name: "Heritage-oriented Style",
+        reason: "구조적 형태와 모노그램을 반복 선택합니다.",
+        evidenceProductIds: ["P1", "P2"],
+      },
+    ],
+    evidence_product_ids: ["P1", "P2"],
+    source: "ai_generated",
+    is_current: true,
+    created_at: "2026-01-01T00:00:00Z",
+    updated_at: "2026-01-01T00:00:00Z",
+  };
+
+  it("keeps only taste_summary/core_preference/ai_traits/evidence_product_ids", () => {
+    const result = toCustomerProfileContext(profile);
+
+    expect(result).toEqual({
+      taste_summary: profile.taste_summary,
+      core_preference: {
+        colorTone: ["mono"],
+        silhouetteForm: ["structured"],
+        material: ["leather"],
+        monogramDensity: ["medium"],
+      },
+      ai_traits: profile.ai_traits,
+      evidence_product_ids: profile.evidence_product_ids,
+    });
+  });
+
+  it("drops DB row metadata TASK-204 does not need (id/customer_id/source/is_current/timestamps)", () => {
+    const result = toCustomerProfileContext(profile);
+
+    expect(result).not.toHaveProperty("id");
+    expect(result).not.toHaveProperty("customer_id");
+    expect(result).not.toHaveProperty("source");
+    expect(result).not.toHaveProperty("is_current");
+    expect(result).not.toHaveProperty("created_at");
+    expect(result).not.toHaveProperty("updated_at");
+  });
+
+  it("produces a value that satisfies the existing GatekeeperInput.customer_profile schema", () => {
+    const result = toCustomerProfileContext(profile);
+
+    expect(() =>
+      gatekeeperInputSchema.shape.customer_profile.parse(result),
+    ).not.toThrow();
   });
 });
 

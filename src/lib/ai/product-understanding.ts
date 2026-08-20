@@ -106,6 +106,7 @@ function buildSystemPrompt(): string {
 - 각 Trait은 name, reason, evidence(최소 1개, {source, text})로 구성한다.
 - reason은 이미지/설명에서 실제로 확인되는 근거에 기반해야 하며, 근거 없는 브랜드 의미를 부여하지 않는다.
 - evidence.source는 "product_image" 또는 "product_description" 중 하나만 사용한다.
+- **evidence.text는 요약/의역/재작성/문장 결합이 아니라, source가 "product_description"인 경우 위 Product Description 원문에 실제로 존재하는 문자열을 글자 그대로 복사한 exact substring이어야 한다.** 단어를 다른 단어로 바꾸거나, 구두점을 더하거나 빼거나, 대소문자를 바꾸거나, 여러 문장/구를 이어붙이지 않는다 — 원문의 연속된 한 구간을 그대로 잘라서 쓴다. 이 규칙은 검증 단계에서 officialDescription.includes(evidence.text.trim())로 기계적으로 확인되므로, 원문과 한 글자라도 다르면 그 결과 전체가 거부된다.
 
 # 최상위 evidence
 - Core4 판정을 뒷받침하는 근거를 최소 1개 이상 {source, text} 형태로 포함한다.
@@ -445,7 +446,9 @@ async function callVisionJson(req: VisionJsonRequest): Promise<{ data: unknown; 
 
   const response = await getOpenAIClient().chat.completions.create({
     model,
-    temperature: req.temperature ?? 0,
+    // gpt-5-mini는 temperature=0(요청 기본값)을 지원하지 않고 API 기본값(1)만 허용한다
+    // (400 Unsupported value) — 이 모델일 때만 temperature 필드 자체를 요청에서 제외한다.
+    ...(model === "gpt-5-mini" ? {} : { temperature: req.temperature ?? 0 }),
     response_format: {
       type: "json_schema",
       json_schema: {
