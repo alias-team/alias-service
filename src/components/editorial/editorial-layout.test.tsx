@@ -81,7 +81,7 @@ describe("EditorialEmail", () => {
     ];
 
     expect(markup).toContain('data-editorial-container="true"');
-    expect(markup).toContain('width="640"');
+    expect(markup).toContain('width="1440"');
     expect(markup).toContain('data-editorial-element="BrandLogo"');
     expect(markup.match(/data-editorial-component="SectionDivider"/g)).toHaveLength(
       3,

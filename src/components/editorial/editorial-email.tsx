@@ -15,8 +15,8 @@ export function EditorialEmail({ data }: EditorialEmailProps) {
   const { editorial, email_header: emailHeader } = data;
   return (
     <table role="presentation" width="100%" cellPadding="0" cellSpacing="0" style={{ backgroundColor: colors.canvas }}><tbody><tr>
-      <td align="center" style={{ padding: "40px 16px" }}>
-        <table data-editorial-container="true" role="presentation" width="640" cellPadding="0" cellSpacing="0" style={{ backgroundColor: colors.paper, maxWidth: "640px", width: "100%" }}><tbody>
+      <td align="center" style={{ padding: "40px 0 80px" }}>
+        <table data-editorial-container="true" role="presentation" width="1440" cellPadding="0" cellSpacing="0" style={{ backgroundColor: colors.paper, maxWidth: "1440px", width: "100%" }}><tbody>
           <tr><td><EditorialHeader cover={editorial.cover} emailHeader={emailHeader} /></td></tr>
           <tr><td><SectionDivider label="Hero" /></td></tr>
           <tr><td><HeroSection hero={editorial.brand_story} openingMessage={editorial.opening_message} /></td></tr>

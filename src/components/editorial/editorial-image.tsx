@@ -13,7 +13,7 @@ export function EditorialImage({ alt, height, src }: EditorialImageProps) {
       height={height}
       src={src}
       width="100%"
-      style={{ display: "block", height: "auto", width: "100%" }}
+      style={{ display: "block", height: `${height}px`, objectFit: "cover", width: "100%" }}
     />
   );
 }
